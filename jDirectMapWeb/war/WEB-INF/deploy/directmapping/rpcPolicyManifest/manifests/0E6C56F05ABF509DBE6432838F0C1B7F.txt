@@ -1,0 +1,2 @@
+serviceClass: directmapping.client.GreetingService
+path: B5F3240D0B745C76380DEA2F8CE065C3.gwt.rpc

@@ -1,0 +1,3 @@
+# Module directmapping
+# RPC service class, partial path of RPC policy file
+directmapping.client.GreetingService, B5F3240D0B745C76380DEA2F8CE065C3.gwt.rpc
