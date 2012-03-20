@@ -14,14 +14,13 @@
 			#tree_source{
 				width: 280px;
 				height: 350px;
-				overflow:auto; -ms-overflow-x:hidden; overflow-x:hidden;
+				overflow:auto; 
 			}
 			
 			#tree_destination{
 				width: 280px;
 				height: 350px;
-				overflow:auto; -ms-overflow-x:hidden; overflow-x:hidden;
-				 
+				overflow:auto; 			 
 			}
 			#mapping_main {
 				padding: 0px;
