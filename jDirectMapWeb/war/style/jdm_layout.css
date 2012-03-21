@@ -51,12 +51,21 @@ h2 {
 	font-size: 135%;
 	text-align: center;
 }
+
+
+h3 {
+	font-size: 125%;
+	text-align: left;
+}
+
+
 .textbody {
 	font-size: 110%;
 	line-height: 120%;
 	color: #fff;
 	text-align: justify;
 }
+
 
 /* Links */
 #containerMiddle a {
