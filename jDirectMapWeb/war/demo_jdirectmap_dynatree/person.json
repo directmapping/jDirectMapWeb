@@ -1,0 +1,56 @@
+[
+	{"title": "person", "isFolder": true, "key": "person", "xpath" : "" , "expand": true, 
+		"children": [
+			{"title": "initials", "xpath" : "/person"},
+			{"title": "first_name", "xpath" : "/person"},
+			{"title": "middle_name", "xpath" : "/person"},
+            {"title": "surname", "xpath" : "/person"},
+            {"title": "shipping_address" , "isFolder": true,"xpath" : "/person",
+				"children": [
+                            {"title": "addressline1" ,"xpath" : "/person/shipping_address" },
+                            {"title": "addressline2" ,"xpath" : "/person/shipping_address"},
+                            {"title": "city" ,"xpath" : "/person/shipping_address"},
+                            {"title": "county" ,"xpath" : "/person/shipping_address"},
+							{"title": "postcode" ,"xpath" : "/person/shipping_address"},
+							{"title": "country" ,"xpath" : "/person/shipping_address"}
+						]
+			},
+            
+			
+			{"title": "gender" ,"xpath" : "/person"},
+			{"title": "phonenum" ,"xpath" : "/person"},
+			{"title": "email" ,"xpath" : "/person"},
+			{"title": "age" ,"xpath" : "/person"},
+			{"title": "gender1" ,"xpath" : "/person"},
+			{"title": "phonenum1" ,"xpath" : "/person"},
+			{"title": "email1" ,"xpath" : "/person"},
+			{"title": "age1" ,"xpath" : "/person"},
+			{"title": "gender2" ,"xpath" : "/person"},
+			{"title": "phonenum2" ,"xpath" : "/person"},
+			{"title": "emai2" ,"xpath" : "/person"},
+			{"title": "age2" ,"xpath" : "/person"},
+			{"title": "creditcard", "isFolder": true, "key": "creditcard" , "xpath" : "/person",
+				"children": [
+									{"title": "type" ,"xpath" : "/person/creditcard" },
+									{"title": "number" ,"xpath" : "/person/creditcard"},
+									{"title": "cardholder_name" ,"xpath" : "/person/creditcard"},
+									{"title": "issuedate" ,"xpath" : "/person/creditcard"},
+									{"title": "expdate" ,"xpath" : "/person/creditcard"},
+									
+	
+						{"title": "billing_address" , "isFolder": true,"xpath" : "/person/creditcard",
+										"children": [
+													{"title": "addressline1" ,"xpath" : "/person.creditcard/billing_address" },
+													{"title": "addressline2" ,"xpath" : "/person.creditcard/billing_address"},
+													{"title": "city" ,"xpath" : "/person.creditcard/billing_address"},
+													{"title": "county" ,"xpath" : "/person.creditcard/billing_address"},
+													{"title": "postcode" ,"xpath" : "/person.creditcard/billing_address"},
+													{"title": "country" ,"xpath" : "/person.creditcard/billing_address"}
+												]
+									}
+				]
+			}
+	        
+		]
+	}
+]
