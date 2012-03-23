@@ -27,7 +27,7 @@
 				<div id="wikicontent">
 
   <h1 class="pagetitle box">
-      The jQuery Direct Map Project
+      The jQuery Direct Map Project Plan
   </h1>
     <div class="page-history">
       Page history
@@ -45,7 +45,8 @@
     <div style="" id="wikipage-inner">
 
     <p>&nbsp;</p>
-<p><span style="font-size:85%;"><strong>type:</strong> widget</span></p>
+<p><span style="font-size:85%;"><strong>start:</strong> 2011 Q4</span></p>
+<p><span style="font-size:85%;"><strong>end:</strong> 2012 Q2</span></p>
 <p><span style="font-size:85%;"><strong>release:</strong> 0.9</span></p>
 <p><span style="font-size:85%;"><strong>status:</strong> in progress</span></p>
 <p><span style="font-size:85%;"><strong>documentation:</strong> <a href="./jdm_resources.html">  http://directmapping.appspot.com/jdirectmap/jdm_resources.html</a></span></p>
@@ -53,14 +54,26 @@
 <p><span style="font-size:85%;">&nbsp;</span></p>
 <p><span style="display:none;">&nbsp;</span></p>
 <hr /><h2>&nbsp;</h2>
-<h3><span style="color:#333333;">1 - Description:</span></h3>
+<h3><span style="color:#333333;">1 - Introduction:</span></h3>
 <p>&nbsp;</p>
 <p>The jQuery Direct Map or jDirectMap is a project to enable users to relate two different structural data sets.
  To support clear design and optimize performance for hierarchival strcuture, combination of spindown with tree control is used to selectively hide and show information or nodes.
- The simplest form is a spindown or disclosure triangle which is used to hide or show a single block of information.
- A set of these stacked together is referred to as a tree control. More information on UI guidelines:</p>
- <p><a href="https://developer.apple.com/library/mac/#documentation/UserExperience/Conceptual/AppleHIGuidelines/UEGuidelines/UEGuidelines.html#//apple_ref/doc/uid/TP40002720-TPXREF101">Apple UI guidelines</a></p>
+<br/>
+<br/> The project was started as subproject of the <a href="http://directmapping.appspot.com">SmooKs Direct Mapping</a> project. It is all part of <a href="http://erpel.at/">ERPEL</a> project of the Institute of Software Technology and Interactive Systems (ISIS) a Faculty of Computer Science of the Vienna University of Technology.
+<br/> 
+
+The jDirectMap project will be supported and implemented under supervision of both the Electronic Commerce Group  and Business Informatics Group <br/> mainly 
+			<a href="http://www.ec.tuwien.ac.at/~marco/">Marco Zapletal </a> ,
+			<a href="http://www.big.tuwien.ac.at/staff/pliegl">Phillip Liegel, </a>
+			as well as 
+others. <br/> 
+
 <p>&nbsp;</p>
+<ul> 
+			<li><a href="http://www.isis.tuwien.ac.at">www.isis.tuwien.ac.at</a></li>
+			<li><a href="http://www.big.tuwien.ac.at">www.big.tuwien.ac.at</a></li>
+			<li><a href="http://www.ec.tuwien.ac.at">www.ec.tuwien.ac.at</a></li>
+			</ul>
 <p>&nbsp;</p>
 <p>Currently the jQuery UI Tree plugin is in development, but not yet documented (as it's not part of a jQuery UI release). is a tree page on the UI documentation wiki page with more details about the project:</p>
 <p><a href="http://wiki.jqueryui.com/w/page/12138128/Tree">jQuery Tree project</a></p>
@@ -74,64 +87,77 @@
 Certain minimal requirements and fuctional specification with precondition need to be defined and followed in each version.</p>
 <p>&nbsp;</p>
 <hr /><h3>&nbsp;</h3>
-<h3><span style="color:#333333;">2 - Visual Design:</span></h3>
+<h3><span style="color:#333333;">2 - Timeline</span></h3>
+
 <p>&nbsp;</p>
-<p>Comprehesive comparasion of currently avaiable tools on the market with the technical limitations considered in visual design prototypes.</p>
+<p><h4>Project Kick-Off was on 11.11.2011</h4></p>
 <p>&nbsp;</p>
-<hr /><p>&nbsp;</p>
-<h3>&nbsp;</h3>
-<h3><span style="color:#333333;">3 - Functional Specifications/Requirements:</span></h3>
+The parent project SmooKs Direct Mapping required a user interface to enable user to define relationship between source and destination document. The current Eclipse Plugin for SmooKs was 
+not anymore discontenued by JBoss. The design was not able to support native direct mapping. Due to this reason there was need to create new tool. The project started with top design overview
+what is to achieve. A web based tool which will be cloud ready had strong influence on the decision not to create plugins into any desktop development tools. A reasearch on proper web based 
+technology to fulfill requirements was commited.
 <p>&nbsp;</p>
-<p>(Detailed description of how the script will be structured: defaults, options, architecture, extensibility, etc.)</p>
+<p><h4>Progress meeting 24.11.2011</h4></p>
 <p>&nbsp;</p>
-<hr /><h3>&nbsp;</h3>
-<h3><span style="color:#333333;">4 - Markup &amp; Style:</span></h3>
+As the technology a strong growing JavaScript Library <a href="http://jquery.com/">jQuery - "write less do more"</a> was agreed. The independence of the jDirectMap project will enable
+to deliver tool to the jQuery community as jQuery plugin. For implementation already existing plugins will be used. The research of these tools was commited.
 <p>&nbsp;</p>
-<h4>&nbsp;&nbsp;&nbsp;&nbsp; 4.1 Initial markup examples</h4>
+<hr />
 <p>&nbsp;</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp; (Pre-enhanced HTML&nbsp;markup structure that will be transformed into the final widget.)</p>
-<p>&nbsp;</p>
-<h4>&nbsp;&nbsp;&nbsp;&nbsp; 4.2 Recommended transformed HTML markup</h4>
-<p>&nbsp;</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(The HTML markup structure and classes that will be used by the scripts in the enhanced version)&nbsp;</p>
-<p>&nbsp;</p>
-<h4>&nbsp;&nbsp;&nbsp;&nbsp; 4.3 Accessibility recommendation</h4>
-<p>&nbsp;</p>
-<p>&nbsp;&nbsp;&nbsp; (Detailed recommendations for ARIA, HTML markup, CSS and javascript that will contribute to universal access and full section 508 accessibility for screen readers, mobile devices and any other devices)&nbsp;</p>
-<p>&nbsp;</p>
-<h4>&nbsp;&nbsp;&nbsp;&nbsp; 4.4 CSS &amp; Theme</h4>
-<p>&nbsp;</p>
-<p>&nbsp;&nbsp;&nbsp; (Description of the CSS classes to be used for all states, how custom theming and Themeroller support will work.)&nbsp;</p>
-<p>&nbsp;</p>
-<hr /><h3>&nbsp;</h3>
-<h3><span style="color:#333333;">5 - Latest version of plugin:</span></h3>
-<p>&nbsp;</p>
-<p>Project is hosted on GitHub.</p>  <p><a href="https://github.com/directmapping/jDirectMap">jDirectMap on GitHub</a></p> 
-<p>&nbsp;</p>
-<hr /><p>&nbsp;</p>
-<h3><span style="color:#333333;">6 - Open issues being discussed</span></h3>
-<p>&nbsp;</p>
-<p>(Use this area to place things that we're hashing out like features and options we're not sure we should include, questions about how this fits into UI and relates to other widgets and utilities, known problems, whether features should be broken across multiple releases, etc.)</p>
-<p>&nbsp;</p>
+<p><h4>Progress meeting 22.12.2011</h4></p>
 <p>&nbsp;</p>
 
-<ul>
-<li>Design features as highlight of active elements, highlight the source and destination based on the row.</li>
-<li>Autoscroll options. what happens if the tree is too long (wide,  tall)</li>
-<li>Add collapse all button</li>
-<li>Enable to customize icons and styles / theme of the grid and trees</li>
-<li>How To design and integrate functions.</li>
-<li>JSON source and destination</li>
-<li>Which features should be built-in and which should be handled manually or via extensions</li>
-<li>What should the API be</li>
-<li>For the features we decide not to build-in, what extension points and hooks do we provide in the DOM and in the API to ensure those features can reasonably be built on top</li>
+<p>As part of this project a wide research on currently avaiable jQuery tree plug-ins was conducted. Results (full report to be published shortly) shown that there are fairly robust plugins with lots of features to consider:</p>
+<p><a href="http://code.google.com/p/dynatree/">DynaTree</a></p>
+<p><a href="http://www.jstree.com/">jsTree</a></p>
+<p><a href="http://www.baby666.cn/v3/main.php#_zTreeInfo/">zTree</a></p>
 
-</ul><p>&nbsp;</p>
 <p>&nbsp;</p>
-<hr /><p>&nbsp;</p>
-<h2>&nbsp;</h2>
-<h2>&nbsp;</h2>
+<p> For the jDirectMap map element a <a href="http://www.trirand.com/blog/">jqGrid plugin</a> was choosen.
 <p>&nbsp;</p>
+
+<hr />
+
+<p>&nbsp;</p>
+<p><h4>Progress meeting 08.02.2012</h4></p>
+<p>&nbsp;</p>
+<p>First demo version was presented. The functionality and design present was approved. A discussion around design of functions was conducted. Also the limits of JQuery and technical difficulties presented.
+Some of the plugins behaive unexpected in multi plugin enviroment. The export of the mapping result as well as the possible import of the source and destination file was outlined.</p>
+<p>&nbsp;</p>
+<hr />
+<p>&nbsp;</p>
+<p><h4>Progress meeting 21 - 23.03.2012</h4></p>
+<p>&nbsp;</p>
+Project web site go live! Hosted on <a href="http://code.google.com/appengine/">Google App Engine</a><br/>
+First demo version finished with all 3 tree plugins and published on the web site.
+Project was moved on <a href="https://github.com">GitHub</a> see <a href="./jdm_resources.html">resources page for more details.</a>
+
+<p>&nbsp;</p>
+<hr /><h3>&nbsp;</h3>
+<h3><span style="color:#333333;">3 - Plans</span></h3>
+
+<p>&nbsp;</p>
+<table>
+<tr>
+<td width="450px">Improve documentation </td><td>estimated : 2012 Q1 <td>
+</tr>
+<tr>
+<td>Refactor current code and package as jQuery plugin </td><td>estimated : 2012 Q2 <td>
+</tr>
+<tr>
+<td>Improve user interface and customization </td><td>estimated : 2012 Q1<td>
+</tr>
+<tr>
+<td>Implement the import routine for each of the jTree plugins </td><td>estimated : 2012 Q1<td>
+</tr>
+<tr>
+<td>Design functions and publish into demo  </td><td>   estimated : 2012 Q1<td>
+</tr>
+</table>
+</ul>
+<p>&nbsp;</p>
+<hr />
+
 
     </div>
 
