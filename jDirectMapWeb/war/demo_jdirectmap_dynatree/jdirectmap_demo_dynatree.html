@@ -15,6 +15,8 @@
 	<link href="../jquery_jqgrid/ui.jqgrid.css"  rel="stylesheet" type="text/css" media="screen" />
 	
 	<script type="text/javascript" src="../jquery/jquery.hotkeys.js"></script>
+	<link href="./../style/jdm_layout.css"  rel="stylesheet" type="text/css" media="screen" />
+
 	
 	
 				
@@ -51,31 +53,25 @@ jQuery(document).ready(function(){
 --></script>
 </head>
 <body class="prototype">
-	<div id="header">
-			<div style="width:210px; float:left;z-index: 100;">
-			<a href="http://jdirectmap.appspot.com"><img src="logo.png" width="210" height="93" alt="Smooks DM logo"></a></div>
-			<div align="center"> <h1>jDirectMap jQuery Plugin Prototype v1.04</h1>
-		<p class="description">	This sample uses DynaTree plugin for tree and data grid enabled through jqGrid plugin.	</p>
-		</div >
-	</div>
-		 
-		 
-	    <div id="input_data">
-			 <form>
-				 <div style="height:494px; width:48%; overflow-y:auto; float:left;text-align:center;">
-					<p>Source XML:</p>
-					<textarea id="source_xml_area" name="source_xml_area" cols="80" rows="25" ></textarea>
-				</div>
-			   
-				<div style="height:494px; width:48%; overflow-y:auto; float:rigt;text-align:center;" >
-				<p>Destination XML:</p>
-				<textarea id="dest_xml_area" name="dest_xml_area" cols="80" rows="25" ></textarea>
-				</div>
-				<div style="float:rigt;text-align:center;" >
-				<input type="submit" value="Upload source and destination" />
-				</div>
-		   </form>
-		</div>
+	<body class="prototype">
+		<div id="distance"></div>
+		<div id="container">
+		<div id="layerLogo">
+		<a href="./../jdm_index.html"><img src="./../images/logo.png" width="210" height="93" alt="Smooks DM logo"></a></div>
+			<div id="layerMenu">
+				<ul>
+					<li><a href="./../jdm_project.html" id="menu-about" title="Project details of jDirectMap"><span>About Project</span></a></li>
+					<li><a href="./../jdm_plan.html" id="menu-plan" title="Plan of jDirectMap project"><span>Plan</span></a></li>
+					<li><a href="./../jdm_resources.html" id="menu-resources"  title="Infromation about projects involved and used by jDirectMap"><span>Resources</span></a></li>
+					<li><a href="./../jdm_demo.html" id="menu-demo" title="Demo of jDirectMap"><span>Demo</span></a></li>
+					<li><a href="http://directmapping.appspot.com" id="menu-smooksdirectmapping" title="The SmooKs Direct Mapping"><span>SmooKs Direct Mapping</span></a></li>
+				</ul>
+			</div>
+			<div id="layerMenuShadow"><img src="./../images/menu_shadow.png" width="805" height="7" alt="Shadow"></div>		<div id="containerTop"></div>
+	
+		<h2>jDirectMap jQuery Plugin Prototype v1.04: Tree mapping</h2>
+		<p class="description">	This sample uses jsTree plugin for tree and data grid enabled through jqGrid plugin.	</p>
+		
 		
 	<table id="mapping_main">
 	<thead>
@@ -113,6 +109,8 @@ jQuery(document).ready(function(){
 	</tr>
 	</tbody>
 	</table>
+	</div> 
+	</div> 
 	
 </body>
 </html>
