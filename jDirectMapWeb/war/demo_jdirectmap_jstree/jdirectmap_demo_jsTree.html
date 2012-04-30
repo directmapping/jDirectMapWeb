@@ -2,68 +2,38 @@
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<title>jDirectMap jQuery Plugin Prototype</title>
 
 	
 	<link rel="shortcut icon" href="favicon.ico"/>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	
 		
 	<script src="./../jquery/jquery.js" type="text/javascript"></script>
-	<script src="./../jquery/jquery-ui.custom.js" type="text/javascript"></script>
-	<script src="./../jquery/jquery.cookie.js" type="text/javascript"></script>
+	<!--	<script src="./../jquery/jquery-ui.custom.js" type="text/javascript"></script>-->
+	<!--	<script src="./../jquery/jquery.cookie.js" type="text/javascript"></script>  -->
+	<!-- 	<script src="./../jquery/jquery.hotkeys.js" type="text/javascript" ></script>  -->
+		
+	<!-- STYLE AND JAVASCIRPT RELATED TO jqGRID -->
 	<script src="./../jquery_jqgrid/grid.locale-en.js" type="text/javascript"></script>
 	<script src="./../jquery_jqgrid/jquery.jqGrid.min.js" type="text/javascript"></script>
+	<link href="./../jquery_jqgrid/jquery-ui-1.8.17.custom.css" rel="stylesheet" type="text/css"  media="screen" />
+	<link href="./../jquery_jqgrid/ui.jqgrid.css" rel="stylesheet" type="text/css" media="screen" />
 
-	<link rel="stylesheet" type="text/css" href="./../jquery_jqgrid/jquery-ui-1.8.17.custom.css" />
+	<!-- JAVASCIRPT jsTREE -->
+	<script src="./../jquery_jstree/jquery.jstree.js" type="text/javascript"></script>
+	
+	<!-- jDIRECT MAP STYLE CUSTOMIZATION - jsTREE scroll bar definition 	-->
 	<link href="style.css"  rel="stylesheet" type="text/css" media="screen" />
+	<!-- jDIRECT MAP JAVASCRIPT CUSTOMIZATION -->
+	<script src="./../jquery_jdirectmap/jquery.jdirectmap.jstree.js" type="text/javascript"></script>
+	<script src="./../jquery_jdirectmap/jquery.jdirectmap.treeprocessor.jstree.js" type="text/javascript"></script>
+	
+	<!-- STYLE OF jDIRECT WEB PROJECT	-->
 	<link href="./../style/jdm_layout.css"  rel="stylesheet" type="text/css" media="screen" />
 	
-	<link href="./../jquery_jqgrid/ui.jqgrid.css"  rel="stylesheet" type="text/css" media="screen" />
 	
-	<script type="text/javascript" src="./../jquery/jquery.hotkeys.js"></script>
-	<script type="text/javascript" src="./../jquery_jstree/jquery.jstree.js"></script>
-	<script type="text/javascript" src="./../jquery_jdirectmap/jquery.jdirectmap.jstree.js"></script>
-	<script type="text/javascript" src="./../jquery_jdirectmap/jquery.jdirectmap.treeprocessor.jstree.js"></script>
-	
-	
-	
-<script type="text/javascript"><!--
 
-jQuery(document).ready(function(){
-
-	$("#mapping_main").hide();
-	$("form").submit(function () {    
-	//	helper_multitree();
-		
-		
-		helper_read_xml();
-		helper_grid();
-		$("form").hide();
-		$("#mapping_main").show();
-		return false; // so it won't submit
-	}); 			
-			
-});
-
-/**
-jQuery.download = function(url, data, method){	//url and data options required
-		if( url && data ){ 		
-				//data can be string of parameters or array/object		
-				data = typeof data == 'string' ? data : jQuery.param(data);		
-				//split params into form inputs		
-				var inputs = '';		
-				jQuery.each(data.split('&'), function(){ 			
-						var pair = this.split('=');	
-						inputs+='<input type="hidden" name="'+ pair[0] +'" value="'+ pair[1] +'" />';
-				});	
-				//send request		
-				jQuery('<form action="'+ url +'" method="'+ (method||'post') +'">'+inputs+'</form>').appendTo('body').submit().remove();	
-		};
-};
-**/
-
---></script>
 </head>
 <body class="prototype">
 <div id="distance"></div>
@@ -123,12 +93,13 @@ jQuery.download = function(url, data, method){	//url and data options required
 		<td>
 			<table id="mapping_list"></table>
 			<div id="gridpager">	
-					<input type="BUTTON" id="deletedata" value="Delete Selected" />
+					<input type="BUTTON" id="deletedata" value="Delete" />
 					<input type="BUTTON" id="moveup" value="Move up" />
 					<input type="BUTTON" id="movedown"  value="Move down"  />
 					<input type="BUTTON" id="clear"  value="Clear"  />
-					<input type="BUTTON" id="import"  value="Import New"  />
-					<input type="BUTTON" id="export"  value="Export Mapping"  />
+					<input type="BUTTON" id="collapse"  value="Collapse All"  />
+					<input type="BUTTON" id="import"  value="Import"  />
+					<input type="BUTTON" id="export"  value="Export"  />
 			</div> 
 		</td>
 		<td>

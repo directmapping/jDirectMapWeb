@@ -1,5 +1,19 @@
 	
-	function helper_read_xml(){
+	 jQuery(document).ready(function(){
+
+						$("#mapping_main").hide();
+						$("form").submit(function () {    
+										
+							helper_read_xml();
+							helper_grid();
+							$("form").hide();
+							$("#mapping_main").show();
+							return false; // so it won't submit
+						}); 			
+								
+					});
+	 
+	 function helper_read_xml(){
 
 			var jTreeSource = new jDirectMapTreeProcessor("TEXT",$("#source_xml_area").val(), $("#tree_source"));
 			var jTreeDestination = new jDirectMapTreeProcessor("TEXT",$("#dest_xml_area").val(), $("#tree_destination"));
@@ -46,7 +60,7 @@
 				datatype: "local",
 				colNames:['id','Source Parameter', 'Destination Parameter'],
 				colModel:[
-					{name:'id',index:'id', width:1 , sortable: false},
+					{name:'id',index:'id', width:15 , sortable: false},
 					{name:'sparam',index:'sparam', width:280 , sortable: false},
 					{name:'dparam',index:'dparam', width:280, align:"right",  sortable: false}  		
 				],
@@ -55,7 +69,17 @@
 				height: "100%",
 				width:"auto",
 				editurl:"someurl.php", // local processing
-				pager: '#gridpager'  // remove the data
+				onSelectRow: function(id){ 
+					  if(id){ 
+						
+						$('a').removeClass('jstree-clicked');
+						$('li[id="' + $table.getRowData(id).sparam + '"]').children('a').addClass("jstree-clicked");
+						$('li[id="' + $table.getRowData(id).dparam + '"]').children('a').addClass("jstree-clicked");
+						$("#tree_destination").jstree("open_all");
+						$("#tree_source").jstree("open_all");
+					}
+				},
+			    pager: '#gridpager'  // remove the data
 	});
 
 	
@@ -92,6 +116,15 @@
 					 }
 				 alert(dataString);
 				 });
+	
+	
+	$("#collapse").click(function(){
+		
+			$("#tree_destination").jstree("close_all");
+			$("#tree_source").jstree("close_all");
+		 });
+
+	
 	
 	$("#clear").click(function(){
 					// get IDs of all the rows odf jqGrid 
@@ -165,6 +198,11 @@
 		 $table.setGridParam({sortname:'id'}).trigger('reloadGrid');
 		 }
 	}
+				 
+				 
+				
+				 
+				 
 	
 	}
 	
