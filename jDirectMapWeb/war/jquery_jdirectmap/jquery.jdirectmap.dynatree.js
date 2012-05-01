@@ -1,4 +1,18 @@
-	
+	 
+	jQuery(document).ready(function(){
+
+						$("#mapping_main").hide();
+						$("form").submit(function () {    
+										
+							helper_read_xml();
+							helper_grid();
+							$("form").hide();
+							$("#mapping_main").show();
+							return false; // so it won't submit
+						}); 			
+								
+					});
+	 
 	function helper_read_xml(){
 
 			//var jTreeSource = new jDirectMapTreeProcessor("TEXT",$("#source_xml_area").val(), $("#tree_source"));
