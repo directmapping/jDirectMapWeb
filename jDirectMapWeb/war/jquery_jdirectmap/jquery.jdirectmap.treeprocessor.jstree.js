@@ -59,41 +59,38 @@ function jDirectMapTreeProcessor(input_type, input, tree_element) {
 				}
 			});
 	}else if(input_type == "TEXT"){
-		this.data = $.parseXML(input);
+		try {
+			this.data = $.parseXML(input);
+		} 
+		catch(e) { 
+				alert("Error: "+e); 
+				return;
+		}
+		
 	}else{
 		this.data = data;
 	}
+	
 	this.tree_element = tree_element;
-	
-	
 	//Find root:
+	try {	
 	var _root = $(this.data).children(':first-child');
 	var _a_feed = new Array();
-
 	this.vsTraverse($(_root), _a_feed, "" );
-	
 	// if there element HAS attributes add attributes as json data 
 	if(null!=_root[0].attributes && _root[0].attributes.length > 0){
 				
-
 		//get attributes values 
-		var _a_att = this.vsTraverseAtt(_root[0] , "/" + _root[0].nodeName);
-		
+		var _a_att = this.vsTraverseAtt(_root[0] , "");
 		// if there element HAS attributes add attributes as json data 
-		// format [{data: Attributes [element] , attr : {id : /xpath/element}, 	children: [JSON _a_att]}]
 		if(null!=_a_att){
-		
-			_a_feed.push([{"data":"Attributes "+"["+_root[0].nodeName+"]", "attr" : { "id" : parent + "/" +_root[0].nodeName }, "children":_a_att}]);
-			
+				_a_feed.push([{"data":"Attributes "+"["+_root[0].nodeName+"]", "attr" : { "id" :  "/" +_root[0].nodeName + "[@*]"}, "children":_a_att}]);
 		}
 	}
-
-	
-	
 	var _treedata = [{"data":_root[0].nodeName,"attr" : { "id" :  "/" + _root[0].nodeName },"children":_a_feed, "state":"open"}];
 	this.initTree(_treedata);
 	
-
+	} catch(e) { alert("Error: "+e); }
 }
 
 
@@ -149,23 +146,14 @@ jDirectMapTreeProcessor.prototype.vsTraverse = function(node, arr , parent){
 			this.vsTraverse(_ch[i], _vsArr , parent + "/" +  _ch[i].parentNode.nodeName );
 		
 			//get attributes values 
-			var _a_att = this.vsTraverseAtt(_ch[i] , parent);
+			var _a_att = this.vsTraverseAtt(_ch[i] , parent + "/" +  _ch[i].parentNode.nodeName );
 			
 		// if there element HAS attributes add attributes as json data 
-		// format [{data: Attributes [element] , attr : {id : /xpath/element}, 	children: [JSON _a_att]}]
 		if(null!=_a_att){
-		//console.log("attributes");
-		//console.log("format [{data: Attributes [element] , attr : {id : /xpath/element}, 	children: [JSON _a_att]}]");
-		//console.log([{"data":"Attributes "+"["+_ch[i].nodeName+"]", "attr" : { "id" : parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName }, "children":_a_att}]);
-					_vsArr.push([{"data":"Attributes "+"["+_ch[i].nodeName+"]", "attr" : { "id" : parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName }, "children":_a_att}]);
+						_vsArr.push([{"data":"Attributes "+"["+_ch[i].nodeName+"]", "attr" : { "id" : parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName + "[@*]" }, "children":_a_att}]);
 		}
 		//if element has children and frist child is XML DOM 3	TEXT_NODE
-		// format [{data: Attributes [element] , attr : {id : /xpath/element}, 	children: [JSON _vsArr], state:close}]
-		// + ": " + _ch[i].firstChild.textContent
 		if(null!=_ch[i].firstChild && 3 ==_ch[i].firstChild.nodeType){
-		//console.log(_ch[i].nodeName);
-		//console.log("format [{data: Attributes [element] , attr : {id : /xpath/element}, 	children: [JSON _vsArr], state:close}]");
-		//console.log([{"data":_ch[i].nodeName , "attr" : { "id" : parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName }, "children":_vsArr, "state":"close"}]);
 			if(0 == _vsArr.length){
 				arr.push([{"data":_ch[i].nodeName , "attr" : { "id" : parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName }}]);
 		
@@ -174,7 +162,6 @@ jDirectMapTreeProcessor.prototype.vsTraverse = function(node, arr , parent){
 			}
 		}
 		// else there are no children ie element is leaf 
-		// format [{data: Attributes [element] , attr : {id : /xpath/element}, state:close}]
 		else{
 			 arr.push([{"data":_ch[i].nodeName, "attr" : { "id" : parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName }}]);
 		}
@@ -196,12 +183,7 @@ jDirectMapTreeProcessor.prototype.vsTraverseAtt = function(node, parent){
 		
 		//for each attribute of element
 		for(var i=0; i<node.attributes.length; i++){
-		//	console.log("leaf");
-		//	console.log("format [{data: ATTRIBUTE_NAME , attr : {id : /xpath/element.ATTRIBUTE_NAME}}]");
-		//	console.log([{ "data": node.attributes[i].nodeName ,  "attr" : { "id" : parent + "/" + node.nodeName +"."+ node.attributes[i].nodeName }}]  );
-			//_a_atts.push([node.attributes[i].nodeName + ":" + node.attributes[i].nodeValue , "attr" : { "id" : _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName }, "attr" : { "idn" : i}]);
-			// format [{data: ATTRIBUTE_NAME , attr : {id : /xpath/element.ATTRIBUTE_NAME}}]
-			_a_atts.push([{ "data": node.attributes[i].nodeName ,  "attr" : { "id" : parent + "/" + node.nodeName +"."+ node.attributes[i].nodeName }}]  );
+				_a_atts.push([{ "data": node.attributes[i].nodeName ,  "attr" : { "id" : parent + "/" + node.nodeName +"[@"+ node.attributes[i].nodeName + "]"  }}]  );
 		}
 	}
 	return _a_atts;

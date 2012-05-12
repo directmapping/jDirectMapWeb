@@ -64,42 +64,23 @@ function jDirectMapTreeProcessor(input_type, input, tree_element) {
 		this.data = data;
 	}
 	
-	
 	this.tree_element = tree_element;
-	
-	
 	//Find root:
 	var _root = $(this.data).children(':first-child');
 	var _a_feed = new Array();
-
 	this.vsTraverse($(_root), _a_feed, "" );
-			
-	var _treedata = [{ title :_root[0].nodeName, xpath :  "/" + _root[0].nodeName , expand: true ,isFolder: true , children : _a_feed}];
 		
-	
 	// if there element HAS attributes add attributes as json data 
 	if(null!=_root[0].attributes && _root[0].attributes.length > 0){
-				
-
 		//get attributes values 
-		var _a_att = this.vsTraverseAtt(_root[0] , "/" + _root[0].nodeName);
-		
-	// if there element HAS attributes add attributes as json data 
-	// format [{data: Attributes [element] , attr : {id : /xpath/element}, 	children: [JSON _a_att]}]
-	if(null!=_a_att){
-		_treedata.push({ title: "Attributes "+"["+_root[0].nodeName+"]", xpath:  "/" + _root[0].nodeName  , children: _a_att});
+		var _a_att = this.vsTraverseAtt(_root[0] ,"");
+		// if there element HAS attributes add attributes as json data 
+		// format [{data: Attributes [element] , attr : {id : /xpath/element}, 	children: [JSON _a_att]}]
+		if(null!=_a_att){
+			_a_feed.push({ title: "Attributes "+"["+_root[0].nodeName+"]", xpath:  "/" + _root[0].nodeName + "[@*]" , children: _a_att});
+		}		
 	}
-	
-	
-				
-	
-	}
-	
-	
-	
-	
-	
-	
+	var _treedata = [{ title :_root[0].nodeName, xpath :  "/" + _root[0].nodeName , expand: true ,isFolder: true , children : _a_feed}];
 	this.initTree(_treedata,input);
 		
 }
@@ -129,12 +110,12 @@ jDirectMapTreeProcessor.prototype.vsTraverse = function(node, arr , parent){
 			this.vsTraverse(_ch[i], _vsArr , parent + "/" +  _ch[i].parentNode.nodeName );
 		
 			//get attributes values 
-			var _a_att = this.vsTraverseAtt(_ch[i] , parent);
+			var _a_att = this.vsTraverseAtt(_ch[i] , parent + "/" +  _ch[i].parentNode.nodeName );
 			
 		// if there element HAS attributes add attributes as json data 
 		// format [{data: Attributes [element] , attr : {id : /xpath/element}, 	children: [JSON _a_att]}]
 		if(null!=_a_att){
-					_vsArr.push({ title: "Attributes "+"["+_ch[i].nodeName+"]", xpath: parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName , children: _a_att});
+					_vsArr.push({ title: "Attributes "+"["+_ch[i].nodeName+"]", xpath: parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName + "[@*]" , children: _a_att});
 		}
 		//if element has children and frist child is XML DOM 3	TEXT_NODE
 		// format {data: Attributes [element] , attr : {id : /xpath/element}, 	children: [JSON _vsArr], state:close}
@@ -147,7 +128,6 @@ jDirectMapTreeProcessor.prototype.vsTraverse = function(node, arr , parent){
 			}
 		}
 		// else there are no children ie element is leaf 
-		// format {data: Attributes [element] , attr : {id : /xpath/element}, state:close}
 		else{
 			 arr.push({ title : _ch[i].nodeName, xpath : parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName });
 		}
@@ -169,8 +149,7 @@ jDirectMapTreeProcessor.prototype.vsTraverseAtt = function(node, parent){
 		
 		//for each attribute of element
 		for(var i=0; i<node.attributes.length; i++){
-		// format {data: ATTRIBUTE_NAME , id : /xpath/element.ATTRIBUTE_NAME}
-			_a_atts.push({ "title": node.attributes[i].nodeName ,   "xpath" : parent + "/" + node.nodeName +"."+ node.attributes[i].nodeName } );
+				_a_atts.push({ "title": node.attributes[i].nodeName ,   "xpath" : parent + "/" + node.nodeName +"[@"+ node.attributes[i].nodeName + "]"  } );
 		}
 	}
 	return _a_atts;

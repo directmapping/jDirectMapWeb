@@ -64,29 +64,20 @@ function jDirectMapTreeProcessor(input_type, input, tree_element) {
 		this.data = data;
 	}
 	
-	
 	this.tree_element = tree_element;
-	
-		//Find root:
+	//Find root:
 	var _root = $(this.data).children(':first-child');
 	var _a_feed = new Array();
-
-			
 	var _treedata = [{ id:1, pId:0, name :_root[0].nodeName, xpath :  "/" + _root[0].nodeName , open: true}];
-				
 	this.vsTraverse($(_root), _treedata, "" , 1 );
 
-	// if there element HAS attributes add attributes as json data 
+				// if there element HAS attributes add attributes as json data 
         		if(null!=_root[0].attributes && _root[0].attributes.length > 0){
         					var nodeid = _treedata.length + 1;	
-							_treedata.push({"id": nodeid , "pId":  1, "name":"Attributes "+"["+_root[0].nodeName+"]", "xpath" : "/" + _root[0].nodeName  , "open": true ,isFolder: true});
-        				
+							_treedata.push({"id": nodeid , "pId":  1, "name":"Attributes "+"["+_root[0].nodeName+"]", "xpath" : "/" + _root[0].nodeName + "[@*]" , "open": true ,isFolder: true});
 							//get attributes values 
-        					this.vsTraverseAtt(_root[0],_treedata, _root[0].nodeName, nodeid);
-        		
+        					this.vsTraverseAtt(_root[0],_treedata, "", nodeid);
         		}
-				
-				
 	this.initTree(_treedata,input);
 
 }
@@ -203,7 +194,7 @@ jDirectMapTreeProcessor.prototype.vsTraverse = function(node, arr , parent, pid)
         		// if there element HAS attributes add attributes as json data 
         		if(null!=_ch[i].attributes && _ch[i].attributes.length > 0){
         					nodeid  = arr.length + 1;					
-        					arr.push({"id": nodeid, "pId":  pid, "name":"Attributes "+"["+_ch[i].nodeName+"]", "xpath" : parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName , "open": true ,isFolder: true});
+        					arr.push({"id": nodeid, "pId":  pid, "name":"Attributes "+"["+_ch[i].nodeName+"]", "xpath" : parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName + "[@*]" , "open": true ,isFolder: true});
         						//get attributes values 
         					this.vsTraverseAtt(_ch[i] ,arr, parent, nodeid);
         		
@@ -229,7 +220,7 @@ jDirectMapTreeProcessor.prototype.vsTraverseAtt = function(node,arr,parent, pid)
 		for(var i=0; i<node.attributes.length; i++){
 		//	console.log("leaf");
 		nodeid  = arr.length + 1;				
-		arr.push({ "id": nodeid, "pId":  pid, "name": node.attributes[i].nodeName ,   "xpath" : parent + "/" + node.nodeName +"."+ node.attributes[i].nodeName } );
+		arr.push({ "id": nodeid, "pId":  pid, "name": node.attributes[i].nodeName ,   "xpath" : parent + "/" + node.nodeName +"[@"+ node.attributes[i].nodeName + "]" } );
 		
 		}
 	}
