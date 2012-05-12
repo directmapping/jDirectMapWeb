@@ -41,7 +41,7 @@
 */
 function jDirectMapTreeProcessor(input_type, input, tree_element) {
 	this.tree_element = null;
-	/**if(input_type == "AJAX"){
+	if(input_type == "AJAX"){
 		$.ajax({
 				type: "GET",
 				url: input,
@@ -64,25 +64,31 @@ function jDirectMapTreeProcessor(input_type, input, tree_element) {
 		this.data = data;
 	}
 	
-	*/
+	
 	this.tree_element = tree_element;
 	
-	
-	
-	
-	
-	this.initTree(_treedata,input);
-	
-	/**
-	var tree = this.tree_element.dynatree("getTree");
-	var childNode = tree.getNodeByKey("root");
-	
-	childNode.addChild({
-        title: "Document using a custom icon",
-        icon: "customdoc1.gif"
-    });
+		//Find root:
+	var _root = $(this.data).children(':first-child');
+	var _a_feed = new Array();
 
-	**/
+			
+	var _treedata = [{ id:1, pId:0, name :_root[0].nodeName, xpath :  "/" + _root[0].nodeName , open: true}];
+				
+	this.vsTraverse($(_root), _treedata, "" , 1 );
+
+	// if there element HAS attributes add attributes as json data 
+        		if(null!=_root[0].attributes && _root[0].attributes.length > 0){
+        					var nodeid = _treedata.length + 1;	
+							_treedata.push({"id": nodeid , "pId":  1, "name":"Attributes "+"["+_root[0].nodeName+"]", "xpath" : "/" + _root[0].nodeName  , "open": true ,isFolder: true});
+        				
+							//get attributes values 
+        					this.vsTraverseAtt(_root[0],_treedata, _root[0].nodeName, nodeid);
+        		
+        		}
+				
+				
+	this.initTree(_treedata,input);
+
 }
 
 
@@ -92,58 +98,57 @@ function jDirectMapTreeProcessor(input_type, input, tree_element) {
 		
 jDirectMapTreeProcessor.prototype.initTree = function(data,url){
 	
-	this.tree_element.dynatree({
-           	
-			initAjax: {
-			url: url
-		},
-		
-		
-		dnd: {
-			autoExpandMS: 1000,
-			preventVoidMoves: true, // Prevent dropping nodes 'before self', etc.
-			onDragStart: function(node) {
-				return true;
-			},
-			onDragStop: function(node) {
-			},
-			onDragEnter: function(node, sourceNode) {
-				/** sourceNode may be null for non-dynatree droppables.
-				 *  Return false to disallow dropping on node. In this case
-				 *  onDragOver and onDragLeave are not called.
-				 *  Return 'over', 'before, or 'after' to force a hitMode.
-				 *  Any other return value will calc the hitMode from the cursor position.
-				 */
-				return true;
-			},
-			onDragOver: function(node, sourceNode, hitMode) {
-				/** Return false to disallow dropping this node.
-				 *
-				 */
-			},
-			onDrop: function(node, sourceNode, hitMode, ui, draggable) {
-				/**This function MUST be defined to enable dropping of items on the tree.
-				 * sourceNode may be null, if it is a non-Dynatree droppable.
-				 */
-				var copynode;
-												
-					if(hitMode == "over" && sourceNode) {
-						// index calculation  TODO : don't add already existing mapping possible through .unique() function 187 
-						// Given an array of DOM elements, returns an array of the unique elements in the original array.
-						var numberOfRecords = jQuery("#mapping_list").getGridParam("records");
-						logMsg("grid number of rows %s", numberOfRecords);
-						jQuery("#mapping_list").jqGrid('addRowData',++numberOfRecords,{id: numberOfRecords, sparam: sourceNode.data.xpath,dparam: node.data.xpath  } );
-					}
-				
-			},
-			onDragLeave: function(node, sourceNode) {
-				/** Always called if onDragEnter was called.
-				 */
-			}
-		}
-			
-        });
 	
+	/** missing ajax call to get data **/
+	
+	
+		var setting = {
+			edit: {
+				enable: true,
+				showRemoveBtn: false,
+				showRenameBtn: false
+			},
+			data: {
+				simpleData: {
+					enable: true
+				}
+			},
+			callback: {
+				beforeDrag: beforeDrag,
+				beforeDrop: beforeDrop
+			}
+		};
+		
+		
+		function beforeDrag(treeId, treeNodes) {
+			for (var i=0,l=treeNodes.length; i<l; i++) {
+				if (treeNodes[i].drag === false) {
+					return false;
+				}
+			}
+			return true;
+		}
+		function beforeDrop(treeId, treeNodes, targetNode, moveType) {
+		
+		
+		
+				var numberOfRecords = jQuery("#mapping_list").getGridParam("records");
+					jQuery("#mapping_list").jqGrid('addRowData',++numberOfRecords,{id: numberOfRecords, sparam: treeNodes[0].xpath,dparam: targetNode.xpath  } );
+			
+				return false;
+				
+			//return targetNode ? targetNode.drop !== false : true;
+		
+		}
+		
+		
+		
+			$.fn.zTree.init(this.tree_element, setting, data);
+			
+			// add CSS class
+			this.tree_element.addClass("ztree");
+			
+			
 
 }
 
@@ -156,54 +161,57 @@ jDirectMapTreeProcessor.prototype.initTree = function(data,url){
  * @input3 parent xpath 
  *
  **/
-jDirectMapTreeProcessor.prototype.vsTraverse = function(node, arr , parent){
+jDirectMapTreeProcessor.prototype.vsTraverse = function(node, arr , parent, pid){
 	//get children elements
 	var _ch = $(node).children();
 	
 	//for each element - childerns of @input1 node 
 	for(var i=0; i<_ch.length; i++){
-		var _vsArr = new Array();
-		//recursive travel all children
+			
 
-			 /**
+			var nodeid = (pid + i+1);
+
+		//if element has children and frist child is XML DOM 3	TEXT_NODE
+		if(null!=_ch[i].firstChild && 3 ==_ch[i].firstChild.nodeType){
+                                nodeid  = arr.length + 1;
+				arr.push({"id": nodeid, "pId":  pid, "name":_ch[i].nodeName , "xpath" : parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName, "open": true ,isFolder: true});
+        
+		}
+		// else there are no children ie element is leaf 
+		else{
+			if(null==_ch[i].attributes && _ch[i].attributes.length == 0){
+				nodeid  = arr.length + 1;
+				arr.push({"id": nodeid, "pId":  pid, "name":_ch[i].nodeName ,  "xpath" : parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName });
+			}else{
+				nodeid  = arr.length + 1;
+				arr.push({"id": nodeid, "pId":  pid, "name":_ch[i].nodeName , "xpath" : parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName, "open": true ,isFolder: true});
+			}
+		}
+
+		
+			//recursive travel all children
+			
+         		/**
 			  * @input1 current child _ch[i] to process
 			  * @input2 new _vsArr json object to push data into
 			  * @input3 parent xpath parrent plus current node
-			**/
-			this.vsTraverse(_ch[i], _vsArr , parent + "/" +  _ch[i].parentNode.nodeName );
+			  **/
 		
-			//get attributes values 
-			var _a_att = this.vsTraverseAtt(_ch[i] , parent);
 			
-		// if there element HAS attributes add attributes as json data 
-		// format [{data: Attributes [element] , attr : {id : /xpath/element}, 	children: [JSON _a_att]}]
-		if(null!=_a_att){
-		//console.log("attributes");
-		//console.log("format [{data: Attributes [element] , attr : {id : /xpath/element}, 	children: [JSON _a_att]}]");
-		//console.log([{"title":"Attributes "+"["+_ch[i].nodeName+"]", "attr" : { "id" : parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName }, "children":_a_att}]);
-					_vsArr.push([{"title":"Attributes "+"["+_ch[i].nodeName+"]", "xpath" : parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName , "children":_a_att}]);
-		}
-		//if element has children and frist child is XML DOM 3	TEXT_NODE
-		// format [{data: Attributes [element] , attr : {id : /xpath/element}, 	children: [JSON _vsArr], state:close}]
-		// + ": " + _ch[i].firstChild.textContent
-		if(null!=_ch[i].firstChild && 3 ==_ch[i].firstChild.nodeType){
-		//console.log(_ch[i].nodeName);
-		//console.log("format [{data: Attributes [element] , attr : {id : /xpath/element}, 	children: [JSON _vsArr], state:close}]");
-		//console.log([{"title":_ch[i].nodeName , "attr" : { "id" : parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName }, "children":_vsArr, "state":"close"}]);
-			if(0 == _vsArr.length){
-				arr.push([{"title":_ch[i].nodeName ,  "xpath" : parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName }]);
+			this.vsTraverse(_ch[i], arr , parent + "/" +  _ch[i].parentNode.nodeName , nodeid );
 		
-			}else{
-				arr.push([{"title":_ch[i].nodeName , "xpath" : parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName, "children":_vsArr,  "expand": true ,isFolder: true}]);
-			}
-		}
-		// else there are no children ie element is leaf 
-		// format [{data: Attributes [element] , attr : {id : /xpath/element}, state:close}]
-		else{
-			 arr.push([{"title":_ch[i].nodeName, "xpath" : parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName }]);
-		}
+        		// if there element HAS attributes add attributes as json data 
+        		if(null!=_ch[i].attributes && _ch[i].attributes.length > 0){
+        					nodeid  = arr.length + 1;					
+        					arr.push({"id": nodeid, "pId":  pid, "name":"Attributes "+"["+_ch[i].nodeName+"]", "xpath" : parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName , "open": true ,isFolder: true});
+        						//get attributes values 
+        					this.vsTraverseAtt(_ch[i] ,arr, parent, nodeid);
+        		
+        		}
+
 	}	
 }
+
 
 /** processing  attributes of xml element
  *
@@ -212,19 +220,19 @@ jDirectMapTreeProcessor.prototype.vsTraverse = function(node, arr , parent){
  * @output array of attributes in json format
  *
  **/
-jDirectMapTreeProcessor.prototype.vsTraverseAtt = function(node, parent){
-	var _a_atts = null;
+jDirectMapTreeProcessor.prototype.vsTraverseAtt = function(node,arr,parent, pid){
+	
 	//only when attributes exists else return null
 	if(null!=node.attributes && node.attributes.length > 0){
-		_a_atts = new Array();
 		
 		//for each attribute of element
 		for(var i=0; i<node.attributes.length; i++){
 		//	console.log("leaf");
-		// format [{data: ATTRIBUTE_NAME , id : /xpath/element.ATTRIBUTE_NAME}]
-			_a_atts.push([{ "title": node.attributes[i].nodeName ,   "xpath" : parent + "/" + node.nodeName +"."+ node.attributes[i].nodeName }] );
+		nodeid  = arr.length + 1;				
+		arr.push({ "id": nodeid, "pId":  pid, "name": node.attributes[i].nodeName ,   "xpath" : parent + "/" + node.nodeName +"."+ node.attributes[i].nodeName } );
+		
 		}
 	}
-	return _a_atts;
+
 }
 

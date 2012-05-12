@@ -41,7 +41,7 @@
 */
 function jDirectMapTreeProcessor(input_type, input, tree_element) {
 	this.tree_element = null;
-	/**if(input_type == "AJAX"){
+	if(input_type == "AJAX"){
 		$.ajax({
 				type: "GET",
 				url: input,
@@ -64,50 +64,101 @@ function jDirectMapTreeProcessor(input_type, input, tree_element) {
 		this.data = data;
 	}
 	
-	*/
+	
 	this.tree_element = tree_element;
 	
 	
-	/**Find root:
-	//var _root = $(this.data).children(':first-child');
+	//Find root:
+	var _root = $(this.data).children(':first-child');
 	var _a_feed = new Array();
 
-
-	console.log(_a_feed);
 	this.vsTraverse($(_root), _a_feed, "" );
-	console.log(_a_feed);
-	
-	
-	console.log(_a_feed);
-	*/
-	var _treedata = null;//[{"title":_root[0].nodeName, "key": "root", "xpath" :  "/" + _root[0].nodeName , "expand": true ,isFolder: true}];
-	//console.log(_treedata);
-	//, "children": +"["+ [_a_feed] +"]" 
-	//	alert(_a_feed);
-	//	alert(_treedata);
-	
+			
+	var _treedata = [{ title :_root[0].nodeName, xpath :  "/" + _root[0].nodeName , expand: true ,isFolder: true , children : _a_feed}];
+			
 	this.initTree(_treedata,input);
-	
-	/**
-	var tree = this.tree_element.dynatree("getTree");
-	var childNode = tree.getNodeByKey("root");
-	
-	childNode.addChild({
-        title: "Document using a custom icon",
-        icon: "customdoc1.gif"
-    });
+		
+}
 
-	**/
+
+/** recursive processing of xml elements bottom down 
+ *
+ * @input1 node to process
+ * @input2 json object to push data into
+ * @input3 parent xpath 
+ *
+ **/
+jDirectMapTreeProcessor.prototype.vsTraverse = function(node, arr , parent){
+	//get children elements
+	var _ch = $(node).children();
+	
+	//for each element - childerns of @input1 node 
+	for(var i=0; i<_ch.length; i++){
+		var _vsArr = new Array();
+		//recursive travel all children
+
+			 /**
+			  * @input1 current child _ch[i] to process
+			  * @input2 new _vsArr json object to push data into
+			  * @input3 parent xpath parrent plus current node
+			**/
+			this.vsTraverse(_ch[i], _vsArr , parent + "/" +  _ch[i].parentNode.nodeName );
+		
+			//get attributes values 
+			var _a_att = this.vsTraverseAtt(_ch[i] , parent);
+			
+		// if there element HAS attributes add attributes as json data 
+		// format [{data: Attributes [element] , attr : {id : /xpath/element}, 	children: [JSON _a_att]}]
+		if(null!=_a_att){
+					_vsArr.push({ title: "Attributes "+"["+_ch[i].nodeName+"]", xpath: parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName , children: _a_att});
+		}
+		//if element has children and frist child is XML DOM 3	TEXT_NODE
+		// format {data: Attributes [element] , attr : {id : /xpath/element}, 	children: [JSON _vsArr], state:close}
+		if(null!=_ch[i].firstChild && 3 ==_ch[i].firstChild.nodeType){
+				if(0 == _vsArr.length){
+				arr.push({ title: _ch[i].nodeName ,   xpath: parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName });
+		
+			}else{
+				arr.push({ title: _ch[i].nodeName ,  xpath: parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName,  children: _vsArr,  expand: true ,isFolder: true});
+			}
+		}
+		// else there are no children ie element is leaf 
+		// format {data: Attributes [element] , attr : {id : /xpath/element}, state:close}
+		else{
+			 arr.push({ title : _ch[i].nodeName, xpath : parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName });
+		}
+	}	
+}
+
+/** processing  attributes of xml element
+ *
+ * @input1 node to process
+ * @input2 parent xpath 
+ * @output array of attributes in json format
+ *
+ **/
+jDirectMapTreeProcessor.prototype.vsTraverseAtt = function(node, parent){
+	var _a_atts = null;
+	//only when attributes exists else return null
+	if(null!=node.attributes && node.attributes.length > 0){
+		_a_atts = new Array();
+		
+		//for each attribute of element
+		for(var i=0; i<node.attributes.length; i++){
+		// format {data: ATTRIBUTE_NAME , id : /xpath/element.ATTRIBUTE_NAME}
+			_a_atts.push({ "title": node.attributes[i].nodeName ,   "xpath" : parent + "/" + node.nodeName +"."+ node.attributes[i].nodeName } );
+		}
+	}
+	return _a_atts;
 }
 
 
 jDirectMapTreeProcessor.prototype.initTree = function(data,url){
+	console.log(data);	
 	
 	this.tree_element.dynatree({
            	
-			initAjax: {
-			url: url
-		},
+			  children: data,
 		
 		
 		dnd: {
@@ -156,86 +207,5 @@ jDirectMapTreeProcessor.prototype.initTree = function(data,url){
         });
 	
 
-}
-
-
-
-/** recursive processing of xml elements bottom down 
- *
- * @input1 node to process
- * @input2 json object to push data into
- * @input3 parent xpath 
- *
- **/
-jDirectMapTreeProcessor.prototype.vsTraverse = function(node, arr , parent){
-	//get children elements
-	var _ch = $(node).children();
-	
-	//for each element - childerns of @input1 node 
-	for(var i=0; i<_ch.length; i++){
-		var _vsArr = new Array();
-		//recursive travel all children
-
-			 /**
-			  * @input1 current child _ch[i] to process
-			  * @input2 new _vsArr json object to push data into
-			  * @input3 parent xpath parrent plus current node
-			**/
-			this.vsTraverse(_ch[i], _vsArr , parent + "/" +  _ch[i].parentNode.nodeName );
-		
-			//get attributes values 
-			var _a_att = this.vsTraverseAtt(_ch[i] , parent);
-			
-		// if there element HAS attributes add attributes as json data 
-		// format [{data: Attributes [element] , attr : {id : /xpath/element}, 	children: [JSON _a_att]}]
-		if(null!=_a_att){
-		//console.log("attributes");
-		//console.log("format [{data: Attributes [element] , attr : {id : /xpath/element}, 	children: [JSON _a_att]}]");
-		//console.log([{"title":"Attributes "+"["+_ch[i].nodeName+"]", "attr" : { "id" : parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName }, "children":_a_att}]);
-					_vsArr.push([{"title":"Attributes "+"["+_ch[i].nodeName+"]", "xpath" : parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName , "children":_a_att}]);
-		}
-		//if element has children and frist child is XML DOM 3	TEXT_NODE
-		// format [{data: Attributes [element] , attr : {id : /xpath/element}, 	children: [JSON _vsArr], state:close}]
-		// + ": " + _ch[i].firstChild.textContent
-		if(null!=_ch[i].firstChild && 3 ==_ch[i].firstChild.nodeType){
-		//console.log(_ch[i].nodeName);
-		//console.log("format [{data: Attributes [element] , attr : {id : /xpath/element}, 	children: [JSON _vsArr], state:close}]");
-		//console.log([{"title":_ch[i].nodeName , "attr" : { "id" : parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName }, "children":_vsArr, "state":"close"}]);
-			if(0 == _vsArr.length){
-				arr.push([{"title":_ch[i].nodeName ,  "xpath" : parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName }]);
-		
-			}else{
-				arr.push([{"title":_ch[i].nodeName , "xpath" : parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName, "children":_vsArr,  "expand": true ,isFolder: true}]);
-			}
-		}
-		// else there are no children ie element is leaf 
-		// format [{data: Attributes [element] , attr : {id : /xpath/element}, state:close}]
-		else{
-			 arr.push([{"title":_ch[i].nodeName, "xpath" : parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName }]);
-		}
-	}	
-}
-
-/** processing  attributes of xml element
- *
- * @input1 node to process
- * @input2 parent xpath 
- * @output array of attributes in json format
- *
- **/
-jDirectMapTreeProcessor.prototype.vsTraverseAtt = function(node, parent){
-	var _a_atts = null;
-	//only when attributes exists else return null
-	if(null!=node.attributes && node.attributes.length > 0){
-		_a_atts = new Array();
-		
-		//for each attribute of element
-		for(var i=0; i<node.attributes.length; i++){
-		//	console.log("leaf");
-		// format [{data: ATTRIBUTE_NAME , id : /xpath/element.ATTRIBUTE_NAME}]
-			_a_atts.push([{ "title": node.attributes[i].nodeName ,   "xpath" : parent + "/" + node.nodeName +"."+ node.attributes[i].nodeName }] );
-		}
-	}
-	return _a_atts;
 }
 

@@ -15,12 +15,9 @@
 	 
 	function helper_read_xml(){
 
-			//var jTreeSource = new jDirectMapTreeProcessor("TEXT",$("#source_xml_area").val(), $("#tree_source"));
-			//var jTreeDestination = new jDirectMapTreeProcessor("TEXT",$("#dest_xml_area").val(), $("#tree_destination"));
-			var jTreeSource = new jDirectMapTreeProcessor("TEXT","customer.json", $("#tree_source"));
-			var jTreeDestination = new jDirectMapTreeProcessor("TEXT","person.json", $("#tree_destination"));
+			var jTreeSource = new jDirectMapTreeProcessor("TEXT",$("#source_xml_area").val(), $("#tree_source"));
+			var jTreeDestination = new jDirectMapTreeProcessor("TEXT",$("#dest_xml_area").val(), $("#tree_destination"));
 		
-			
 	}	
 	
 	
