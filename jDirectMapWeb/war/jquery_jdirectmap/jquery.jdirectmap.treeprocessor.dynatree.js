@@ -75,7 +75,31 @@ function jDirectMapTreeProcessor(input_type, input, tree_element) {
 	this.vsTraverse($(_root), _a_feed, "" );
 			
 	var _treedata = [{ title :_root[0].nodeName, xpath :  "/" + _root[0].nodeName , expand: true ,isFolder: true , children : _a_feed}];
-			
+		
+	
+	// if there element HAS attributes add attributes as json data 
+	if(null!=_root[0].attributes && _root[0].attributes.length > 0){
+				
+
+		//get attributes values 
+		var _a_att = this.vsTraverseAtt(_root[0] , "/" + _root[0].nodeName);
+		
+	// if there element HAS attributes add attributes as json data 
+	// format [{data: Attributes [element] , attr : {id : /xpath/element}, 	children: [JSON _a_att]}]
+	if(null!=_a_att){
+		_treedata.push({ title: "Attributes "+"["+_root[0].nodeName+"]", xpath:  "/" + _root[0].nodeName  , children: _a_att});
+	}
+	
+	
+				
+	
+	}
+	
+	
+	
+	
+	
+	
 	this.initTree(_treedata,input);
 		
 }
