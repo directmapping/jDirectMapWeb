@@ -39,7 +39,7 @@
 * jDirectMapTreeProcessor
 *
 */
-function jDirectMapTreeProcessor(input_type, input, tree_element) {
+function jDirectMapTreeProcessor(input_type, input, tree_element,type) {
 	this.tree_element = null;
 	if(input_type == "AJAX"){
 		$.ajax({
@@ -78,7 +78,7 @@ function jDirectMapTreeProcessor(input_type, input, tree_element) {
 							//get attributes values 
         					this.vsTraverseAtt(_root[0],_treedata, "", nodeid);
         		}
-	this.initTree(_treedata,input);
+	this.initTree(_treedata,input,type);
 
 }
 
@@ -87,7 +87,7 @@ function jDirectMapTreeProcessor(input_type, input, tree_element) {
 		
 		
 		
-jDirectMapTreeProcessor.prototype.initTree = function(data,url){
+jDirectMapTreeProcessor.prototype.initTree = function(data,url,type){
 	
 	
 	/** missing ajax call to get data **/
@@ -107,8 +107,15 @@ jDirectMapTreeProcessor.prototype.initTree = function(data,url){
 			callback: {
 				beforeDrag: beforeDrag,
 				beforeDrop: beforeDrop
+			},
+			view: {
+				fontCss: getFontCss
 			}
 		};
+		
+		function getFontCss(treeId, treeNode) {
+			return (!!treeNode.highlight) ? {color:"#A60000", "font-weight":"bold"} : {color:"#333", "font-weight":"normal"};
+		}
 		
 		
 		function beforeDrag(treeId, treeNodes) {
@@ -121,12 +128,19 @@ jDirectMapTreeProcessor.prototype.initTree = function(data,url){
 		}
 		function beforeDrop(treeId, treeNodes, targetNode, moveType) {
 		
-		
-		
-				var numberOfRecords = jQuery("#mapping_list").getGridParam("records");
-					jQuery("#mapping_list").jqGrid('addRowData',++numberOfRecords,{id: numberOfRecords, sparam: treeNodes[0].xpath,dparam: targetNode.xpath  } );
+			var numberOfRecords = jQuery("#mapping_list").getGridParam("records");
 			
+				if(type == "source") {
+						jQuery("#mapping_list").jqGrid('addRowData',++numberOfRecords,{id: numberOfRecords, sparam: treeNodes[0].xpath,dparam: targetNode.xpath  } );
+				}
+				else {
+					jQuery("#mapping_list").jqGrid('addRowData',++numberOfRecords,{id: numberOfRecords,sparam: targetNode.xpath , dparam: treeNodes[0].xpath } );
+					
+				}
+					
+					
 				return false;
+				
 				
 			//return targetNode ? targetNode.drop !== false : true;
 		

@@ -134,26 +134,21 @@
 						// index calculation  TODO : don't add already existing mapping possible through .unique() function 187 
 						// Given an array of DOM elements, returns an array of the unique elements in the original array.
 						var numberOfRecords = jQuery("#mapping_list").getGridParam("records");
-						
 						jQuery("#mapping_list").jqGrid('addRowData',++numberOfRecords,{id: numberOfRecords, sparam: data.rslt.o.attr("id"),dparam: data.rslt.r.attr("id") } );
 					
                 }   	
 				});
 				
 	$("#tree_source").bind("move_node.jstree", function (e, data) 
-				{ 
-							
-				if(data.rslt.cy == true)
-				{
-					$.jstree.rollback(data.rlbk);
-					
-						// index calculation  TODO : don't add already existing mapping possible through .unique() function 187 
-						// Given an array of DOM elements, returns an array of the unique elements in the original array.
-						var numberOfRecords = jQuery("#mapping_list").getGridParam("records");
-						
-						jQuery("#mapping_list").jqGrid('addRowData',++numberOfRecords,{id: numberOfRecords, sparam: data.rslt.o.attr("id"),dparam: data.rslt.r.attr("id") } );
-					
-                }   	
+				{ 							
+					if(data.rslt.cy == true)
+					{
+						$.jstree.rollback(data.rlbk);
+							// index calculation  TODO : don't add already existing mapping possible through .unique() function 187 
+							// Given an array of DOM elements, returns an array of the unique elements in the original array.
+							var numberOfRecords = jQuery("#mapping_list").getGridParam("records");
+							jQuery("#mapping_list").jqGrid('addRowData',++numberOfRecords,{id: numberOfRecords ,sparam: data.rslt.r.attr("id") , dparam: data.rslt.o.attr("id")} );	
+	                }   	
 				});		   
 		
 	var $table = $("#mapping_list");	
@@ -252,12 +247,8 @@
 				 			 
 	$("#export").click(function(){
 					alert("Check out https://github.com/dcneiner/Downloadify ");
-					
 					helper_grid();
-					
 					$.download('customer.json','filename=mySpreadsheet&format=json&content=' + $table );
-
-
 				 });				
 				 
 	$("#moveup").click(function(){
@@ -268,7 +259,7 @@
 				   move('down');
 				 });
 
-				 function move(direction){
+	function move(direction){
 		 if($table.getGridParam('selrow')){
 		 var ids = $table.getDataIDs();
 		 var temp = 0;

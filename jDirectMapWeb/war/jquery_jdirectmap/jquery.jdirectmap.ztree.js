@@ -115,11 +115,12 @@
  
 	function helper_read_xml(){
 
-			var jTreeSource = new jDirectMapTreeProcessor("TEXT",$("#source_xml_area").val(), $("#tree_source"));
-			var jTreeDestination = new jDirectMapTreeProcessor("TEXT",$("#dest_xml_area").val(), $("#tree_destination"));
+			var jTreeSource = new jDirectMapTreeProcessor("TEXT",$("#source_xml_area").val(), $("#tree_source"),"source");
+			var jTreeDestination = new jDirectMapTreeProcessor("TEXT",$("#dest_xml_area").val(), $("#tree_destination"),"destination");
 			
 	}	
 	
+
 	
 	function helper_grid(){
 	
@@ -134,6 +135,41 @@
 				],
 				sortname: 'id',
 				viewrecords: false,
+				
+				onSelectRow: function(id){ 
+					  if(id){ 
+						  
+						$('a').removeClass($.fn.zTree.consts.node.CURSELECTED);
+												
+						var streeObj = $.fn.zTree.getZTreeObj("tree_source");
+						var snode = streeObj.getNodesByParam("xpath",  $table.getRowData(id).sparam);
+						
+						for( var i=0, l=snode.length; i<l; i++) {
+								
+								$("#" + snode[i].tId + $.fn.zTree.consts.id.A).addClass($.fn.zTree.consts.node.CURSELECTED);
+						}
+												
+						
+						streeObj.expandAll(true);
+					
+						
+						var dtreeObj = $.fn.zTree.getZTreeObj("tree_destination");
+						var dnode = dtreeObj.getNodesByParam("xpath",  $table.getRowData(id).dparam);
+					
+						for( var i=0, l=dnode.length; i<l; i++) {
+							
+							$("#" + dnode[i].tId + $.fn.zTree.consts.id.A).addClass($.fn.zTree.consts.node.CURSELECTED);
+						}
+						
+						dtreeObj.expandAll(true);
+						
+					}
+				},
+				
+				
+				
+				
+				
 				height: "100%",
 				width:"auto",
 				editurl:"someurl.php", // local processing

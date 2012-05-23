@@ -39,7 +39,7 @@
 * jDirectMapTreeProcessor
 *
 */
-function jDirectMapTreeProcessor(input_type, input, tree_element) {
+function jDirectMapTreeProcessor(input_type, input, tree_element,type) {
 	this.tree_element = null;
 	if(input_type == "AJAX"){
 		$.ajax({
@@ -70,19 +70,18 @@ function jDirectMapTreeProcessor(input_type, input, tree_element) {
 	var _a_feed = new Array();
 	this.vsTraverse($(_root), _a_feed, "" );
 		
-	// if there element HAS attributes add attributes as json data 
-	if(null!=_root[0].attributes && _root[0].attributes.length > 0){
-		//get attributes values 
-		var _a_att = this.vsTraverseAtt(_root[0] ,"");
 		// if there element HAS attributes add attributes as json data 
-		// format [{data: Attributes [element] , attr : {id : /xpath/element}, 	children: [JSON _a_att]}]
-		if(null!=_a_att){
-			_a_feed.push({ title: "Attributes "+"["+_root[0].nodeName+"]", xpath:  "/" + _root[0].nodeName + "[@*]" , children: _a_att});
-		}		
-	}
-	var _treedata = [{ title :_root[0].nodeName, xpath :  "/" + _root[0].nodeName , expand: true ,isFolder: true , children : _a_feed}];
-	this.initTree(_treedata,input);
-		
+		if(null!=_root[0].attributes && _root[0].attributes.length > 0){
+			//get attributes values 
+			var _a_att = this.vsTraverseAtt(_root[0] ,"");
+			// if there element HAS attributes add attributes as json data 
+			// format [{data: Attributes [element] , attr : {id : /xpath/element}, 	children: [JSON _a_att]}]
+			if(null!=_a_att){
+				_a_feed.push({ title: "Attributes "+"["+_root[0].nodeName+"]", key:  "/" + _root[0].nodeName + "[@*]" , children: _a_att});
+			}		
+		}
+		var _treedata = [{ title :_root[0].nodeName, key:  "/" + _root[0].nodeName , expand: true ,isFolder: true , children : _a_feed}];
+		this.initTree(_treedata,input,type);	
 }
 
 
@@ -115,21 +114,21 @@ jDirectMapTreeProcessor.prototype.vsTraverse = function(node, arr , parent){
 		// if there element HAS attributes add attributes as json data 
 		// format [{data: Attributes [element] , attr : {id : /xpath/element}, 	children: [JSON _a_att]}]
 		if(null!=_a_att){
-					_vsArr.push({ title: "Attributes "+"["+_ch[i].nodeName+"]", xpath: parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName + "[@*]" , children: _a_att});
+					_vsArr.push({ title: "Attributes "+"["+_ch[i].nodeName+"]", key: parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName + "[@*]" , children: _a_att});
 		}
 		//if element has children and frist child is XML DOM 3	TEXT_NODE
 		// format {data: Attributes [element] , attr : {id : /xpath/element}, 	children: [JSON _vsArr], state:close}
 		if(null!=_ch[i].firstChild && 3 ==_ch[i].firstChild.nodeType){
 				if(0 == _vsArr.length){
-				arr.push({ title: _ch[i].nodeName ,   xpath: parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName });
+				arr.push({ title: _ch[i].nodeName ,   key: parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName });
 		
 			}else{
-				arr.push({ title: _ch[i].nodeName ,  xpath: parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName,  children: _vsArr,  expand: true ,isFolder: true});
+				arr.push({ title: _ch[i].nodeName ,  key: parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName,  children: _vsArr,  expand: true ,isFolder: true});
 			}
 		}
 		// else there are no children ie element is leaf 
 		else{
-			 arr.push({ title : _ch[i].nodeName, xpath : parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName });
+			 arr.push({ title : _ch[i].nodeName, key: parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName });
 		}
 	}	
 }
@@ -156,14 +155,15 @@ jDirectMapTreeProcessor.prototype.vsTraverseAtt = function(node, parent){
 }
 
 
-jDirectMapTreeProcessor.prototype.initTree = function(data,url){
+jDirectMapTreeProcessor.prototype.initTree = function(data,url,type){
 	console.log(data);	
 	
 	this.tree_element.dynatree({
            	
 			  children: data,
-		
-		
+			  //generateIds: false,
+			  //idPrefix: "dynatree-id-",
+			  selectMode: 3,  
 		dnd: {
 			autoExpandMS: 1000,
 			preventVoidMoves: true, // Prevent dropping nodes 'before self', etc.
@@ -192,12 +192,20 @@ jDirectMapTreeProcessor.prototype.initTree = function(data,url){
 				 */
 				var copynode;
 												
-					if(hitMode == "over" && sourceNode) {
+					if(sourceNode) {  //hitMode == "over"
 						// index calculation  TODO : don't add already existing mapping possible through .unique() function 187 
 						// Given an array of DOM elements, returns an array of the unique elements in the original array.
 						var numberOfRecords = jQuery("#mapping_list").getGridParam("records");
-						logMsg("grid number of rows %s", numberOfRecords);
-						jQuery("#mapping_list").jqGrid('addRowData',++numberOfRecords,{id: numberOfRecords, sparam: sourceNode.data.xpath,dparam: node.data.xpath  } );
+						
+						if(type == "source") {
+							jQuery("#mapping_list").jqGrid('addRowData',++numberOfRecords,{id: numberOfRecords, sparam: node.data.key, dparam: sourceNode.data.key  } );
+						}
+						else {
+							jQuery("#mapping_list").jqGrid('addRowData',++numberOfRecords,{id: numberOfRecords, sparam: sourceNode.data.key,dparam: node.data.key  } );
+						}
+							
+						
+					
 					}
 				
 			},

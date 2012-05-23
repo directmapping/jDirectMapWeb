@@ -116,8 +116,8 @@
 	 
 	function helper_read_xml(){
 
-			var jTreeSource = new jDirectMapTreeProcessor("TEXT",$("#source_xml_area").val(), $("#tree_source"));
-			var jTreeDestination = new jDirectMapTreeProcessor("TEXT",$("#dest_xml_area").val(), $("#tree_destination"));
+			var jTreeSource = new jDirectMapTreeProcessor("TEXT",$("#source_xml_area").val(), $("#tree_source"),"source");
+			var jTreeDestination = new jDirectMapTreeProcessor("TEXT",$("#dest_xml_area").val(), $("#tree_destination"),"destination");
 		
 	}	
 	
@@ -138,6 +138,25 @@
 				height: "100%",
 				width:"auto",
 				editurl:"someurl.php", // local processing
+				onSelectRow: function(id){ 
+					  if(id){ 
+						
+					
+						$("#tree_destination").dynatree("getRoot").visit(function(node){
+						    node.expand(true);
+						});
+						
+						$("#tree_source").dynatree("getRoot").visit(function(node){
+						    node.expand(true);
+						});
+						
+						$("#tree_source").dynatree("getTree").getNodeByKey($table.getRowData(id).sparam).activate();
+						$("#tree_destination").dynatree("getTree").getNodeByKey($table.getRowData(id).dparam).activate();
+						
+						
+						
+					  }
+				},
 				pager: '#gridpager'  // remove the data
 	});
 
