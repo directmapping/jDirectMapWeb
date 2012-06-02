@@ -1,7 +1,7 @@
    jQuery(document).ready(function(){
 
 						$("#mapping_main").hide();
-						
+												
 						$("#source_xml_area").val("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>	<shiporder orderid=\"889923\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:noNamespaceSchemaLocation=\"shiporder.xsd\"><orderperson>John Smith</orderperson>							  <shipto>							    <name>Ola Nordmann</name>							    <address>Langgt 23</address>							    <city>4000 Stavanger</city>							    <country>Norway</country>							  </shipto>							  <item>							    <title>Empire Burlesque</title>							    <note>Special Edition</note>							    <quantity>1</quantity>							    <price>10.90</price>							  </item>							  <item>							    <title>Hide your heart</title>							    <quantity>1</quantity>							    <price>9.90</price>							  </item>							</shiporder>");
 						$("#dest_xml_area").val("<?xml version=\"1.0\"?> " +
 								" <catalog> " +
@@ -107,12 +107,33 @@
 							helper_grid();
 							$("form").hide();
 							$("#mapping_main").show();
+							
+							$("#function_area").val("//Please specify function.\n//Example : \nout1 = in1 + in2;\nout2 = new Date();");
+							   var editor = CodeMirror.fromTextArea(document.getElementById("function_area"), {
+							       lineNumbers: true,
+							       matchBrackets: true
+							     });
+							$("#function_table").css('width','100%')   
+							  
+							$("#mapping_list").setGridWidth($(document).width()*0.40);
+							
+							$("#mapping_list").css('width','100%'); 
+							$("#gbox_mapping_list").css('width','100%'); 
+							$("#gview_mapping_list").css('width','100%'); 
+							$("#gridpager").css('width','100%');
+							$("#mapping_list").css('width','100%');
+							$(".ui-jqgrid-hdiv").css('width','100%');
+							$(".ui-jqgrid-htable").css('width','100%');
+							$(".ui-jqgrid-bdiv").css('width','100%');
+							
+							
 							return false; // so it won't submit
 						}); 			
 								
 					});
  
- 
+
+   
 	function helper_read_xml(){
 
 			var jTreeSource = new jDirectMapTreeProcessor("TEXT",$("#source_xml_area").val(), $("#tree_source"),"source");
@@ -125,22 +146,35 @@
 	function helper_grid(){
 	
 	var $table = $("#mapping_list");	
+	
+	
+	
 	$table.jqGrid({        
 				datatype: "local",
 				colNames:['id','Source Parameter', 'Destination Parameter'],
 				colModel:[
-					{name:'id',index:'id', width:1 , sortable: false},
-					{name:'sparam',index:'sparam', width:280 , sortable: false},
-					{name:'dparam',index:'dparam', width:280, align:"right",  sortable: false}  		
+					{name:'id',index:'id', width:100 , sortable: false},
+					{name:'sparam',index:'sparam', width:1000 , sortable: false},
+					{name:'dparam',index:'dparam', width:1000, align:"right",  sortable: false}  		
 				],
+				defaults : {
+					recordtext: "View {0} - {1} of {2}",
+				    emptyrecords: "No records to view",
+					loadtext: "Loading...",
+					autowidth : "true",
+					shrinktofit : "true"
+				},
 				sortname: 'id',
+				width: "100%",
+				height: "250",
 				viewrecords: false,
 				
 				onSelectRow: function(id){ 
 					  if(id){ 
 						  
-						$('a').removeClass($.fn.zTree.consts.node.CURSELECTED);
-												
+						  $("#tree_source").find('a').removeClass($.fn.zTree.consts.node.CURSELECTED);
+						  $("#tree_destination").find('a').removeClass($.fn.zTree.consts.node.CURSELECTED);
+													
 						var streeObj = $.fn.zTree.getZTreeObj("tree_source");
 						var snode = streeObj.getNodesByParam("xpath",  $table.getRowData(id).sparam);
 						
@@ -162,6 +196,7 @@
 						}
 						
 						dtreeObj.expandAll(true);
+		
 						
 					}
 				},
@@ -169,15 +204,12 @@
 				
 				
 				
-				
-				height: "100%",
-				width:"auto",
 				editurl:"someurl.php", // local processing
 				pager: '#gridpager'  // remove the data
 	});
 
-	
-	
+
+
 	
 	
 	$("#deletedata").click(function(){
@@ -194,7 +226,20 @@
 						 $table.addRowData(i + 1, tableData[i]);
 					}
 				});
+	
+	$("#clearfunction").click(function(){
+		$("#par_tree_source").empty();
+		$("#par_tree_destination").empty();
+		$("#function_table").css('width','100%')   
+	});
 
+	$("#createfunction").click(function(){
+		$("#par_tree_source").empty();
+		$("#par_tree_destination").empty();
+		$("#function_area").val("//Please specify function.\n//Example : \nout1 = in1 + in2;\nout2 = new Date();");
+	});
+	
+	
 	$("#getrow").click(function(){
 				 var dataString = '';
 				 var ids = $table.getDataIDs();

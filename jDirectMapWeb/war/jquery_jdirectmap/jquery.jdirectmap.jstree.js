@@ -167,8 +167,9 @@
 				editurl:"someurl.php", // local processing
 				onSelectRow: function(id){ 
 					  if(id){ 
-						
-						$('a').removeClass('jstree-clicked');
+				
+						$("#tree_source").find('a').removeClass('jstree-clicked');
+						$("#tree_destination").find('a').removeClass('jstree-clicked');	
 						$('li[id="' + $table.getRowData(id).sparam + '"]').children('a').addClass("jstree-clicked");
 						$('li[id="' + $table.getRowData(id).dparam + '"]').children('a').addClass("jstree-clicked");
 						$("#tree_destination").jstree("open_all");

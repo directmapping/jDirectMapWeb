@@ -52,6 +52,11 @@ h2 {
 	text-align: center;
 }
 
+.description{
+	
+	text-align: center;
+}
+
 
 h3 {
 	font-size: 125%;
@@ -165,16 +170,33 @@ a img,
 
 /* Background */
 #containerTop {
-	height: 45px;
-	width: 1000px;
+	
+	width: 1150px;
+	margin: 100px auto 0 auto;
+	position: relative;
+	clear: left;
+	background-color: transparent;
 }
+#containerTopSpace {
+	height: 15px;
+	
+	width: 1150px;
+	margin: 100px auto 0 auto;
+
+}
+
 #containerMiddle {
 	min-height: 400px;
 	padding: 0 40px;
 }
 #containerBottom {
 	height: 56px;
-	width: 1000px;
+	
+	width: 1150px;
+	margin: 100px auto 0 auto;
+	position: relative;
+	clear: left;
+	background-color: transparent;
 }
 
 
@@ -188,10 +210,10 @@ a img,
 	top: -95px;
 }
 #container {
-	margin: 100px auto 0 auto;
+	
 	position: relative;
-	height: 600px;
-	width: 1150px;
+	height: 100%;
+	width: 100%;
 	clear: left;
 	background-color: transparent;
 }

@@ -83,8 +83,6 @@ function jDirectMapTreeProcessor(input_type, input, tree_element,type) {
 }
 
 
-
-		
 		
 		
 jDirectMapTreeProcessor.prototype.initTree = function(data,url,type){
@@ -106,16 +104,54 @@ jDirectMapTreeProcessor.prototype.initTree = function(data,url,type){
 			},
 			callback: {
 				beforeDrag: beforeDrag,
-				beforeDrop: beforeDrop
+				beforeDrop: beforeDrop,
+				onDrop: dropFunction
 			},
-			view: {
-				fontCss: getFontCss
-			}
+			
 		};
 		
-		function getFontCss(treeId, treeNode) {
-			return (!!treeNode.highlight) ? {color:"#A60000", "font-weight":"bold"} : {color:"#333", "font-weight":"normal"};
+		function dropFunction(e, treeId, treeNodes, targetNode, moveType) {
+			var domId = "dom_" + treeId;
+			var parId = "par_" + treeId;
+			if (moveType == null && (domId == e.target.id)) {
+								
+				var newDom = $("#" + parId ).find("span[domId=" + treeId + treeNodes[0].id + "]");
+				if (newDom.length > 0) {
+					newDom.removeClass("domBtn_Disabled");
+					newDom.addClass("domBtn");
+				} else {
+					var id = $("#" + parId ).find('span').length + 1;
+				
+					
+					if(treeId == "tree_source") {
+						id = "in" + id;
+						$("#" + parId).append("<span class='domBtn_source'   domId='" + treeId + treeNodes[0].id + "'>" +  id + ": " + treeNodes[0].xpath + "</span>");
+					}
+					else if(treeId == "tree_destination") {
+						id = "out" + id;
+						$("#" + parId).append("<span class='domBtn_destination'   domId='" + treeId + treeNodes[0].id + "'>" +  id + ": " + treeNodes[0].xpath + "</span>");
+						
+					}
+					
+					
+					
+					
+				}
+				
+			} else if ( $(e.target).parents(".domBtnDiv").length > 0) {
+				if(treeId = "tree_source") {
+					alert("Input parameters accept only elements from source tree");
+				}
+				else if(treeId = "tree_destination") {
+					alert("Ouput parameters accept only elements from detination tree");
+				}
+				else {
+					alert("Only tree elements allowed to be droped here");
+				}
+			}
 		}
+		
+		
 		
 		
 		function beforeDrag(treeId, treeNodes) {
@@ -128,18 +164,25 @@ jDirectMapTreeProcessor.prototype.initTree = function(data,url,type){
 		}
 		function beforeDrop(treeId, treeNodes, targetNode, moveType) {
 		
-			var numberOfRecords = jQuery("#mapping_list").getGridParam("records");
 			
-				if(type == "source") {
-						jQuery("#mapping_list").jqGrid('addRowData',++numberOfRecords,{id: numberOfRecords, sparam: treeNodes[0].xpath,dparam: targetNode.xpath  } );
-				}
-				else {
-					jQuery("#mapping_list").jqGrid('addRowData',++numberOfRecords,{id: numberOfRecords,sparam: targetNode.xpath , dparam: treeNodes[0].xpath } );
+			
+					var numberOfRecords = jQuery("#mapping_list").getGridParam("records");
 					
-				}
+						if(type == "source" && treeId == "tree_destination") {
+								jQuery("#mapping_list").jqGrid('addRowData',++numberOfRecords,{id: numberOfRecords, sparam: treeNodes[0].xpath, dparam: targetNode.xpath  } );
+								$("#tree_source").find('a').removeClass($.fn.zTree.consts.node.CURSELECTED);
+								
+								
+						}
+						else if (type == "destination" && treeId == "tree_source") {
+								jQuery("#mapping_list").jqGrid('addRowData',++numberOfRecords,{id: numberOfRecords, sparam: targetNode.xpath , dparam: treeNodes[0].xpath } );
+								$("#tree_destination").find('a').removeClass($.fn.zTree.consts.node.CURSELECTED);
+							
+						}
+						
+			
 					
-					
-				return false;
+			return false;
 				
 				
 			//return targetNode ? targetNode.drop !== false : true;
@@ -170,25 +213,28 @@ jDirectMapTreeProcessor.prototype.vsTraverse = function(node, arr , parent, pid)
 	//get children elements
 	var _ch = $(node).children();
 	
-	//for each element - childerns of @input1 node 
+	//for each element - child of @input1 node 
 	for(var i=0; i<_ch.length; i++){
 			
 
-			var nodeid = (pid + i+1);
+			var curr_nodeid = (pid + i+1);
 
-		//if element has children and frist child is XML DOM 3	TEXT_NODE
+		//if element has children and first child is XML DOM 3	TEXT_NODE
 		if(null!=_ch[i].firstChild && 3 ==_ch[i].firstChild.nodeType){
-                                nodeid  = arr.length + 1;
+                             var   nodeid  = arr.length + 1;
+                             curr_nodeid = nodeid;
 				arr.push({"id": nodeid, "pId":  pid, "name":_ch[i].nodeName , "xpath" : parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName, "open": true ,isFolder: true});
         
 		}
-		// else there are no children ie element is leaf 
+		// else there are no child ie element is leaf 
 		else{
 			if(null==_ch[i].attributes && _ch[i].attributes.length == 0){
-				nodeid  = arr.length + 1;
+				var nodeid  = arr.length + 1;
+				curr_nodeid = nodeid;
 				arr.push({"id": nodeid, "pId":  pid, "name":_ch[i].nodeName ,  "xpath" : parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName });
 			}else{
-				nodeid  = arr.length + 1;
+				var nodeid  = arr.length + 1;
+				curr_nodeid = nodeid;
 				arr.push({"id": nodeid, "pId":  pid, "name":_ch[i].nodeName , "xpath" : parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName, "open": true ,isFolder: true});
 			}
 		}
@@ -207,10 +253,10 @@ jDirectMapTreeProcessor.prototype.vsTraverse = function(node, arr , parent, pid)
 		
         		// if there element HAS attributes add attributes as json data 
         		if(null!=_ch[i].attributes && _ch[i].attributes.length > 0){
-        					nodeid  = arr.length + 1;					
-        					arr.push({"id": nodeid, "pId":  pid, "name":"Attributes "+"["+_ch[i].nodeName+"]", "xpath" : parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName + "[@*]" , "open": true ,isFolder: true});
+        					var nodeid  = arr.length + 1;					
+        					arr.push({"id": nodeid, "pId":  curr_nodeid, "name":"Attributes "+"["+_ch[i].nodeName+"]", "xpath" : parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName + "[@*]" , "open": true ,isFolder: true});
         						//get attributes values 
-        					this.vsTraverseAtt(_ch[i] ,arr, parent, nodeid);
+        					this.vsTraverseAtt(_ch[i] ,arr, parent + "/" +  _ch[i].parentNode.nodeName, nodeid);
         		
         		}
 
@@ -233,7 +279,7 @@ jDirectMapTreeProcessor.prototype.vsTraverseAtt = function(node,arr,parent, pid)
 		//for each attribute of element
 		for(var i=0; i<node.attributes.length; i++){
 		//	console.log("leaf");
-		nodeid  = arr.length + 1;				
+		var nodeid  = arr.length + 1;				
 		arr.push({ "id": nodeid, "pId":  pid, "name": node.attributes[i].nodeName ,   "xpath" : parent + "/" + node.nodeName +"[@"+ node.attributes[i].nodeName + "]" } );
 		
 		}
