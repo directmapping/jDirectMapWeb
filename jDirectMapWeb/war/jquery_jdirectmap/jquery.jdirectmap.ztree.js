@@ -102,7 +102,7 @@
 						
 						
 						$("#xmlsubmit").click(function(){  
-										
+							
 							helper_read_xml();
 							helper_grid();
 							$("#input_data").hide();
@@ -127,12 +127,12 @@
 							$(".ui-jqgrid-bdiv").css('width','100%');
 							
 							
-							return false; // so it won't submit
-						}); 			
+							
+						}); 		
 								
 					});
  
-
+		
    
 	function helper_read_xml(){
 
