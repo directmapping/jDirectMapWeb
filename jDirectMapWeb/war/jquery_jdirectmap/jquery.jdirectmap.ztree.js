@@ -101,11 +101,11 @@
 						" </catalog> " );
 						
 						
-						$("form").submit(function () {    
+						$("#xmlsubmit").click(function(){  
 										
 							helper_read_xml();
 							helper_grid();
-							$("form").hide();
+							$("#input_data").hide();
 							$("#mapping_main").show();
 							
 							$("#function_area").val("//Please specify function.\n//Example : \nout1 = in1 + in2;\nout2 = new Date();");
