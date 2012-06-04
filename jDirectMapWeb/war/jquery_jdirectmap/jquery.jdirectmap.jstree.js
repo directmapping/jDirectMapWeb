@@ -101,29 +101,52 @@
 						  " </book> " +
 						" </catalog> " );
 						
-						$("form").submit(function () {    
+						$("#xmlsubmit").click(function(){      
 						
 							
 							
 							helper_read_xml();
 							helper_grid();
-							$("form").hide();
+							$("#input_data").hide();
 							$("#mapping_main").show();
-							return false; // so it won't submit
+							
+
+							$("#function_area").val("//Please specify function.\n//Example : \nout1 = in1 + in2;\nout2 = new Date();");
+							   var editor = CodeMirror.fromTextArea(document.getElementById("function_area"), {
+							       lineNumbers: true,
+							       matchBrackets: true
+							     });
+							$("#function_table").css('width','100%')   
+							  
+							$("#mapping_list").setGridWidth($(document).width()*0.40);
+							$("#mapping_list").setGridWidth($(document).width()*0.40);
+							$("#mapping_list").css('width','100%'); 
+							$("#gbox_mapping_list").css('width','100%'); 
+							$("#gview_mapping_list").css('width','100%'); 
+							$("#gridpager").css('width','100%');
+							$("#mapping_list").css('width','100%');
+							$(".ui-jqgrid-hdiv").css('width','100%');
+							$(".ui-jqgrid-htable").css('width','100%');
+							$(".ui-jqgrid-bdiv").css('width','100%');
+							
+							
+							
 						}); 			
 								
 					});
 	 
 	 function helper_read_xml(){
 
-			var jTreeSource = new jDirectMapTreeProcessor("TEXT",$("#source_xml_area").val(), $("#tree_source"));
-			var jTreeDestination = new jDirectMapTreeProcessor("TEXT",$("#dest_xml_area").val(), $("#tree_destination"));
+			var jTreeSource = new jDirectMapTreeProcessor("TEXT",$("#source_xml_area").val(), $("#tree_source"),"source");
+			var jTreeDestination = new jDirectMapTreeProcessor("TEXT",$("#dest_xml_area").val(), $("#tree_destination"),"destination");
 			
 			
 	}	
 	
 	function helper_grid(){
 	
+			
+		
 	$("#tree_destination").bind("move_node.jstree", function (e, data) 
 				{ 
 							
@@ -162,8 +185,8 @@
 				],
 				sortname: 'id',
 				viewrecords: false,
-				height: "100%",
-				width:"auto",
+				width: "100%",
+				height: "250",
 				editurl:"someurl.php", // local processing
 				onSelectRow: function(id){ 
 					  if(id){ 
@@ -181,7 +204,33 @@
 
 	
 	
-	
+	$("#clearfunction").click(function(){
+		$("#par_tree_source").empty();
+		$("#par_tree_destination").empty();
+		$("#function_area").val("//Please specify function.\n//Example : \nout1 = in1 + in2;\nout2 = new Date();");
+	});
+
+	$("#createfunction").click(function(){
+		
+		var numberOfRecords = jQuery("#mapping_list").getGridParam("records");
+		
+		if($("#functionname").val() == ""){
+			alert("Please specify unique funcation name");	
+		}
+		else if($("#par_tree_destination" ).find('span').length == 0){
+			alert("Please specify at least one ouput parameter");	
+			}
+		else if($("#par_tree_source" ).find('span').length == 0){
+			alert("Please specify at least one input parameter");				
+		}
+		else{
+			jQuery("#mapping_list").jqGrid('addRowData',++numberOfRecords,{id: numberOfRecords, sparam: $("#functionname").val() +  " Input" , dparam: $("#functionname").val() +  " Output" } );
+			$("#par_tree_source").empty();
+			$("#par_tree_destination").empty();
+			$("#functionname").val("");
+			$("#function_area").val("//Please specify function.\n//Example : \nout1 = in1 + in2;\nout2 = new Date();");
+		}
+	});
 	
 	$("#deletedata").click(function(){
 				var tableData = new Array();

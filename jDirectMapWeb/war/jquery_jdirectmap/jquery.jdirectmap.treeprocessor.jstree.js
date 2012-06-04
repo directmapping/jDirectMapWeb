@@ -39,7 +39,7 @@
 * jDirectMapTreeProcessor
 *
 */
-function jDirectMapTreeProcessor(input_type, input, tree_element) {
+function jDirectMapTreeProcessor(input_type, input, tree_element,type) {
 	this.tree_element = null;
 	if(input_type == "AJAX"){
 		$.ajax({
@@ -88,9 +88,108 @@ function jDirectMapTreeProcessor(input_type, input, tree_element) {
 		}
 	}
 	var _treedata = [{"data":_root[0].nodeName,"attr" : { "id" :  "/" + _root[0].nodeName },"children":_a_feed, "state":"open"}];
-	this.initTree(_treedata);
 	
+	if(type == "source"){
+		this.initTreeSource(_treedata);
+	}
+	else if(type == "destination"){
+		this.initTreeDestination(_treedata);
+	}
+	else{
+		this.initTree(_treedata);
+	}
 	} catch(e) { alert("Error: "+e); }
+}
+
+
+jDirectMapTreeProcessor.prototype.initTreeSource = function(data){
+	this.tree_element.jstree({
+		"json_data" : {
+			"data":data,
+			"progressive_render":"true"
+		},
+		"rules" : { drag_copy:"on", multitree:true },
+		"dnd" : { 
+		 "after": false,
+		 "before": false,
+		 "inside": true,
+		 "drag_target" : false,
+		 "drop_target" : "#dom_tree_source",
+         "drop_finish" : function (data) {
+        		var  param_id = "tree_source_" + data.o.attr("id");
+        		
+        		
+        		var match_param = 0;
+        		$("#par_tree_source").find("span").each(function() {
+						if(    this.attributes["domId"].value  == param_id ) {
+						match_param++;
+						}					
+						
+        			});
+     
+        		if (match_param == 0){
+	    				var id = $("#par_tree_source" ).find('span').length + 1;
+						id = "in" + id;
+						$("#par_tree_source").append("<span class='domBtn_source'   domId='" + param_id + "'>" +  id + ": " +  data.o.attr("id")  + "</span>");
+	               }		
+	           
+	     	}
+		 },
+		 "crrm" : { 
+				"after": false,
+				"before": false,
+				"inside": true,
+            "move" : {
+				"always_copy" : "multitree",
+            }
+        },
+		"plugins" : [ "themes", "json_data", "ui" ,"dnd","crrm" ]
+	});
+}
+
+
+
+jDirectMapTreeProcessor.prototype.initTreeDestination = function(data){
+	this.tree_element.jstree({
+		"json_data" : {
+			"data":data,
+			"progressive_render":"true"
+		},
+		"rules" : { drag_copy:"on", multitree:true },
+		"dnd" : { 
+		 "after": false,
+		 "before": false,
+		 "inside": true,
+		 "drag_target" : false,
+		 "drop_target" : "#dom_tree_destination",
+	     "drop_finish" : function (data) {
+	    		var  param_id = "tree_destination_" + data.o.attr("id");
+	    		var match_param = 0;
+        		$("#par_tree_destination").find("span").each(function() {
+						if(    this.attributes["domId"].value  == param_id ) {
+						match_param++;
+						}					
+						
+        			});
+     
+        		if (match_param == 0){
+	    				var id = $("#par_tree_destination" ).find('span').length + 1;
+						id = "out" + id;
+						$("#par_tree_destination").append("<span class='domBtn_destination'   domId='" + param_id + "'>" +  id + ": " +  data.o.attr("id")  + "</span>");
+	               }		
+	           
+	     	}
+		 },
+		 "crrm" : { 
+				"after": false,
+				"before": false,
+				"inside": true,
+            "move" : {
+				"always_copy" : "multitree",
+            }
+        },
+		"plugins" : [ "themes", "json_data", "ui" ,"dnd","crrm" ]
+	});
 }
 
 
@@ -105,8 +204,9 @@ jDirectMapTreeProcessor.prototype.initTree = function(data){
 		 "after": false,
 		 "before": false,
 		 "inside": true,
-		 "drop_target" : false,
+		 "drop_target" : true,
 		 "drag_target" : false
+		 
 		 },
 		 "crrm" : { 
 				"after": false,
