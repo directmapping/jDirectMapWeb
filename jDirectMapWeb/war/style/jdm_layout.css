@@ -106,7 +106,7 @@ a img,
 /* Menu */
 #layerMenu {
 	position: absolute;
-	width: 920px;
+	width:  90%;
 	height: 20px;
 	z-index: 3;
 	left: 200px;
@@ -171,8 +171,8 @@ a img,
 /* Background */
 #containerTop {
 	
-	width: 1150px;
-	margin: 100px auto 0 auto;
+	width: 100%;
+	margin: 10% auto 0 auto;
 	position: relative;
 	clear: left;
 	background-color: transparent;
@@ -180,8 +180,8 @@ a img,
 #containerTopSpace {
 	height: 15px;
 	
-	width: 1150px;
-	margin: 100px auto 0 auto;
+	width: 100%;
+	margin: 10% auto 0 auto;
 
 }
 
@@ -192,8 +192,8 @@ a img,
 #containerBottom {
 	height: 56px;
 	
-	width: 1150px;
-	margin: 100px auto 0 auto;
+	width: 100%
+	margin: 10% auto 0 auto;
 	position: relative;
 	clear: left;
 	background-color: transparent;
