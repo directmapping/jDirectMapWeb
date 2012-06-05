@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<link rel="shortcut icon" href="favicon.ico"/>
+		<title>jDirectMap jQuery Plug-in Prototype</title>
+
+
+	<script src="./../jquery/jquery.js" type="text/javascript"></script>
+	<!--	<script src="./../jquery/jquery-ui.custom.js" type="text/javascript"></script>-->
+	<!--	<script src="./../jquery/jquery.cookie.js" type="text/javascript"></script>  -->
+	<!-- 	<script src="./../jquery/jquery.hotkeys.js" type="text/javascript" ></script>  -->
+		
+	<!-- STYLE AND JAVASCIRPT RELATED TO jqGRID -->
+	<script src="./../jquery_jqgrid/grid.locale-en.js" type="text/javascript"></script>
+	<script src="./../jquery_jqgrid/jquery.jqGrid.min.js" type="text/javascript"></script>
+	<link href="./../jquery_jqgrid/jquery-ui-1.8.17.custom.css" rel="stylesheet" type="text/css"  media="screen" />
+	<link href="./../jquery_jqgrid/ui.jqgrid.css" rel="stylesheet" type="text/css" media="screen" />
+
+	<!-- STYLE OF jDIRECT WEB PROJECT	-->
+	<link href="./../style/jdm_layout.css"  rel="stylesheet" type="text/css" media="screen" />
+	
+	<!-- jDIRECT MAP STYLE CUSTOMIZATION - jsTREE scroll bar definition 	-->
+	<link href="style.css"  rel="stylesheet" type="text/css" media="screen" />
+	<!-- jDIRECT MAP JAVASCRIPT CUSTOMIZATION -->
+	<script src="./../jquery_jdirectmap/jquery.jdirectmap.jstree.js" type="text/javascript"></script>
+	<script src="./../jquery_jdirectmap/jquery.jdirectmap.treeprocessor.jstree.js" type="text/javascript"></script>
+	
+	<!-- JAVASCIRPT jsTREE -->
+	<script src="./../jquery_jstree/jquery.jstree.js" type="text/javascript"></script>
+	
+	<!-- CodeMirror plugin -->
+	<script src="./../jquery_codemirror/codemirror.js" type="text/javascript"></script>
+	<script src="./../jquery_codemirror/function_code.js" type="text/javascript"></script>
+	<link href="./../jquery_codemirror/codemirror.css" rel="stylesheet" type="text/css" media="screen" />
+	
+
+
+</head>
+<body>
+	<div id="distance"></div>
+	<div id="container">
+	<div id="containerTop">	<div id="layerLogo">
+		<a href="./../jdm_index.html"><img src="./../images/logo.png" width="210" height="93" alt="Smooks DM logo"/></a></div>
+<div id="layerMenu">
+	<ul>
+		<li><a href="./../jdm_project.html" id="menu-about" title="Project details of jDirectMap"><span>About Project</span></a></li>
+		<li><a href="./../jdm_plan.html" id="menu-plan" title="Plan of jDirectMap project"><span>Plan</span></a></li>
+		<li><a href="./../jdm_resources.html" id="menu-resources"  title="Infromation about projects involved and used by jDirectMap"><span>Resources</span></a></li>
+		<li><a href="./../jdm_demo.html" id="menu-demo" title="Demo of jDirectMap"><span>Demo</span></a></li>
+		<li><a href="http://directmapping.appspot.com" id="menu-smooksdirectmapping" title="The SmooKs Direct Mapping"><span>SmooKs Direct Mapping</span></a></li>
+	</ul>
+</div>
+<div id="layerMenuShadow"><img src="./../images/menu_shadow.png" width="805" height="7" alt="Shadow"/></div>	
+
+</div>
+
+<div id="containerTopSpace"> </div>
+		<div id="containerMiddle">
+		<h2>jDirectMap jQuery Plug-in Prototype v1.04: Tree mapping</h2>
+		<p class="description">	This sample uses zTree plug-in for tree and data grid enabled through jqGrid plug-in.	</p>
+				 <div id="input_data">
+
+				 <div style="width:48%; overflow-y:auto; float:left;text-align:center;">
+					<p>Source XML:</p>
+					<textarea id="source_xml_area" name="source_xml_area" cols="80" rows="25" ></textarea>
+				</div>
+			   
+				<div style="width:48%; overflow-y:auto; float:rigt;text-align:center;" >
+					<p>Destination XML:</p>
+					<textarea id="dest_xml_area" name="dest_xml_area" cols="80" rows="25" ></textarea>
+				</div>
+				<div style="float:rigt;text-align:center;" >
+				<input id="xmlsubmit" type="submit" value="Upload source and destination" />
+				</div>
+
+		</div>
+		
+	<table id="mapping_main">
+	<thead>
+	<tr>
+		<th>
+			<p>Source</p>
+		</th>
+		<th>	
+			<p>Mapped Elements</p>
+		</th>
+		<th>
+			<p>Destination</p>
+		</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr valign="top">
+		<td style="width:25%">
+			<div id="tree_source"> </div>
+		</td>
+		<td style="width:45%">
+			<div id='mapping_list_div' style="width:100%">
+			<table id="mapping_list"></table>
+			
+			<div id="gridpager">	
+					<input type="button" id="deletedata" value="Delete" />
+					<input type="button" id="moveup" value="Move up" />
+					<input type="button" id="movedown"  value="Move down"  />
+					<input type="button" id="clear"  value="Clear"  />
+					<input type="button" id="collapse"  value="Collapse All"  />
+					<input type="button" id="import"  value="Import"  />
+					<input type="button" id="export"  value="Export"  />
+			</div> 
+			</div>
+			<br />
+			<div class="ui-jqgrid-titlebar ui-corner-top ui-helper-clearfix" style="font-size:11px">
+				<table id="function_table" class="ui-jqgrid-htable" border="0" cellpadding="0" cellspacing="0">
+				<tr class="ui-state-default ui-jqgrid-hdiv"> 
+				<td width="25%" > Function Input </td>
+				<td width="50%" > Function Script </td>
+				<td width="25%" > Function Output</td>
+				</tr>
+				<tr valign="top" >
+				<td>
+				
+					<div id="dom_tree_source" class="categoryDiv_source jstree-drop">Drop Source Elements  <br/> <br/> Function Input<br/><br/></div>
+				
+				</td>
+				<td rowspan="2">
+				<div id="function_body" style="width:100%;height:100%">
+				<textarea id="function_area" name="function_area"  ></textarea>
+				</div>
+				</td>
+				<td>
+					<div id="dom_tree_destination" class="categoryDiv_destination jstree-drop">Drop Destination Elements <br/>  <br/>Function Output<br/><br/></div>
+				</td>			
+				</tr>
+				<tr  valign="top">
+				<td>
+					<div id="par_tree_source"></div>
+				</td>
+				
+				<td>
+				<div id="par_tree_destination" ></div>
+				</td>
+				</tr>
+				</table>	
+				<div class="ui-state-default ui-jqgrid-pager ui-corner-bottom ui-widget" >
+					
+					Please speficy unique function name : 
+					<input type="text" id="functionname" value="Function_Name"  />
+					<input type="button" id="createfunction" value="Create"  />
+					<input type="button" id="clearfunction" value="Clear" />
+				</div>
+		
+				
+		</div>
+		
+		</td>
+		<td style="width:25%">
+			<div id="tree_destination"></div>
+		</td>
+	</tr>
+	</tbody>
+	</table>	</div>
+		<div id="containerBottom">
+
+		<div id="layerfooter"><img id="layerfooterimg" src="./../images/footer.png" width="1150" alt="Footer logos"/></div>
+	</div>
+	</div>
+	
+	
+</body>
+</html>
