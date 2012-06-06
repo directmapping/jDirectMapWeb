@@ -179,9 +179,78 @@
 				pager: '#gridpager'  // remove the data
 	});
 
+	$("#dom_tree_destination").droppable({
+	    hoverClass: "drophover",
+	    addClasses: true,
+	    over: function(event, ui) {
+	      logMsg("droppable.over, %o, %o", event, ui);
+	    },
+	    drop: function(event, ui) {
+	        var source = ui.helper.data("dtSourceNode") || ui.draggable;
+		    var domId = "dom_" + source.data.key;
+		    var parId = "par_" + source.data.key;
+				if (source.tree.$tree.attr('id') == "tree_destination") {
+										
+					var match_param = 0;
+	        		$("#par_tree_destination").find("span").each(function() {
+							if(    this.attributes["domId"].value  == parId ) {
+							match_param++;
+							}					
+							
+	        			});
+	     
+	        		if (match_param == 0){
+		    				var id = $("#par_tree_destination" ).find('span').length + 1;
+							id = "in" + id;
+							$("#par_tree_destination").append("<span class='domBtn_destination'   domId='" + parId + "'>" +  id + ": " +  source.data.key  + "</span>");
+		               }	
+					
+				
+					
+				} else  {
+						alert("Input parameters accept only elements from destination tree");
+					}
+					
+				
+		    }
+		  });
+		
 	
-	
-	
+	$("#dom_tree_source").droppable({
+	    hoverClass: "drophover",
+	    addClasses: true,
+	    over: function(event, ui) {
+	      logMsg("droppable.over, %o, %o", event, ui);
+	    },
+	    drop: function(event, ui) {
+	    var source = ui.helper.data("dtSourceNode") || ui.draggable;
+	    var domId = "dom_" + source.data.key;
+		var parId = "par_" + source.data.key;
+			if (source.tree.$tree.attr('id') == "tree_source") {
+									
+				var match_param = 0;
+        		$("#par_tree_source").find("span").each(function() {
+						if(    this.attributes["domId"].value  == parId ) {
+						match_param++;
+						}					
+						
+        			});
+     
+        		if (match_param == 0){
+	    				var id = $("#par_tree_source" ).find('span').length + 1;
+						id = "in" + id;
+						$("#par_tree_source").append("<span class='domBtn_source'   domId='" + parId + "'>" +  id + ": " +  source.data.key  + "</span>");
+	               }	
+				
+				
+				
+			} else  {
+					alert("Input parameters accept only elements from source tree");
+				}
+				
+			
+	    }
+	  });
 	
 	$("#deletedata").click(function(){
 				var tableData = new Array();
