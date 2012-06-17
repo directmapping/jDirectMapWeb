@@ -201,7 +201,7 @@
 	     
 	        		if (match_param == 0){
 		    				var id = $("#par_tree_destination" ).find('span').length + 1;
-							id = "in" + id;
+							id = "out" + id;
 							$("#par_tree_destination").append("<span class='domBtn_destination'   domId='" + parId + "'>" +  id + ": " +  source.data.key  + "</span>");
 		               }	
 					

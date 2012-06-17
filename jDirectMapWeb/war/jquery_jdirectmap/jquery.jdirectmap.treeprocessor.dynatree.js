@@ -148,7 +148,7 @@ jDirectMapTreeProcessor.prototype.vsTraverseAtt = function(node, parent){
 		
 		//for each attribute of element
 		for(var i=0; i<node.attributes.length; i++){
-				_a_atts.push({ "title": node.attributes[i].nodeName ,   "xpath" : parent + "/" + node.nodeName +"[@"+ node.attributes[i].nodeName + "]"  } );
+				_a_atts.push({ "title": node.attributes[i].nodeName ,  key : parent + "/" + node.nodeName +"[@"+ node.attributes[i].nodeName + "]"  } );
 		}
 	}
 	return _a_atts;
