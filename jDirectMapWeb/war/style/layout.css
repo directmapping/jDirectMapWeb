@@ -112,7 +112,10 @@ a img,
 	position: absolute;
 	top: -999em;
 }
-
+#menu-smooksdirectmapping {
+	background: url("../images/menu_smooksdirectmapping.png") no-repeat 0 0;
+	width: 240px;
+}
 #menu-about {
 	background: url("../images/menu_about.png") no-repeat 0 0;
 	width: 128px;
