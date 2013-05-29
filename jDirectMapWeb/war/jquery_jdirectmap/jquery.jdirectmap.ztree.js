@@ -301,20 +301,16 @@
 	
 	
 	$("#collapse").click(function(){
+		$.fn.zTree.getZTreeObj("tree_source").expandAll(false);
+		$.fn.zTree.getZTreeObj("tree_destination").expandAll(false);
+		 });
+	
+	$("#expand").click(function(){
 		$.fn.zTree.getZTreeObj("tree_source").expandAll(true);
 		$.fn.zTree.getZTreeObj("tree_destination").expandAll(true);
 		 });
 	
-	
-	$("#export").click(function(){
-					alert("Check out https://github.com/dcneiner/Downloadify ");
-					
-					helper_grid();
-					
-					$.download('customer.json','filename=mySpreadsheet&format=json&content=' + $table );
-
-
-				 });				
+			
 				 
 	$("#moveup").click(function(){
 				   move('up');

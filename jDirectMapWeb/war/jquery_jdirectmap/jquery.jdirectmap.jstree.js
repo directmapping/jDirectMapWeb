@@ -270,7 +270,11 @@
 			$("#tree_source").jstree("close_all");
 		 });
 
-	
+	$("#expand").click(function(){
+		
+		$("#tree_destination").jstree("open_all");
+		$("#tree_source").jstree("open_all");
+	 });
 	
 	$("#clear").click(function(){
 					// get IDs of all the rows odf jqGrid 

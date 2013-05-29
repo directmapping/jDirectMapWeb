@@ -1,291 +1,451 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-		<link rel="shortcut icon" href="favicon.ico"/>
-		<link href="./style/clayout.css" rel="stylesheet" type="text/css"/>	
-		<title>jQuery Direct Map</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link href="./style/clayout.css" rel="stylesheet" type="text/css" />
+<title>jQuery Direct Map</title>
 
 </head>
 <body>
 	<div id="distance"></div>
 	<div id="container">
 		<div id="layerLogo">
-		<a href="./jdm_index.html"><img src="./images/logo.png" width="210" height="93" alt="Smooks DM logo"/></a></div>
-<div id="layerMenu">
-	<ul>
-		<li><a href="./jdm_project.html" id="menu-about" title="Project details of jDirectMap"><span>About Project</span></a></li>
-		<li><a href="./jdm_plan.html" id="menu-plan" title="Plan of jDirectMap project"><span>Plan</span></a></li>
-		<li><a href="./jdm_resources.html" id="menu-resources"  title="Infromation about projects involved and used by jDirectMap"><span>Resources</span></a></li>
-		<li><a href="./jdm_demo.html" id="menu-demo" title="Demo of jDirectMap"><span>Demo</span></a></li>
-		<li><a href="http://directmapping.appspot.com" id="menu-smooksdirectmapping" title="The SmooKs Direct Mapping"><span>SmooKs Direct Mapping</span></a></li>
-	</ul>
-</div>
-<div id="layerMenuShadow"><img src="./images/menu_shadow.png" width="805" height="7" alt="Shadow"/></div>		<div id="containerTop"></div>
+			<a href="./jdm_index.html"><img src="./images/logo.png"
+				width="210" height="93" alt="Smooks DM logo" /></a>
+		</div>
+		<div id="layerMenu">
+			<ul>
+				<li><a href="./jdm_project.html" id="menu-about"
+					title="Project details of jDirectMap"><span>About
+							Project</span></a></li>
+				<li><a href="./jdm_plan.html" id="menu-plan"
+					title="Plan of jDirectMap project"><span>Plan</span></a></li>
+				<li><a href="./jdm_resources.html" id="menu-resources"
+					title="Infromation about projects involved and used by jDirectMap"><span>Resources</span></a></li>
+				<li><a href="./jdm_demo.html" id="menu-demo"
+					title="Demo of jDirectMap"><span>Demo</span></a></li>
+				<li><a href="http://directmapping.appspot.com"
+					id="menu-smooksdirectmapping" title="The SmooKs Direct Mapping"><span>SmooKs
+							Direct Mapping</span></a></li>
+			</ul>
+		</div>
+		<div id="layerMenuShadow">
+			<img src="./images/menu_shadow.png" width="805" height="7"
+				alt="Shadow" />
+		</div>
+		<div id="containerTop"></div>
 		<div id="containerMiddle">
-				
-	<h2>The jQuery Direct Map project is a sub project of SmooKs Direct Mapping project. The goal of this project is to enable create relationship between two structural different data sets visualized as tree.</h2>
+
+			<h2>The jQuery Direct Map project is a sub project of SmooKs
+				Direct Mapping project. The goal of this project is to enable create
+				relationship between two structural different data sets visualized
+				as tree.</h2>
 			<a href="./jdm_project.html#Source" class="transparency process">
-			<img src="./images/lp_jdm_source.png" alt="Source Tree" name="source_tree" width="322" height="450"/></a>
-			<a href="./jdm_project.html#Map" class="transparency process">
-			<img src="./images/lp_jdm_map.png" alt="Map" name="map" width="321" height="450"/></a>
-			<a href="./jdm_project.html#Destination" class="transparency process">
-			<img src="./images/lp_jdm_destination.png" alt="Detination Tree" name="destination_tree" width="324" height="450"/></a>			
-	<br/>
-
-	
-		<div id="wikicontent">
-			<a name="Project_Page"></a>
-  <h1 class="pagetitle box">
-      The jQuery Direct Map Project
-  </h1>
-  <hr />
-  <br/> <h2> Project Content </h2>
-  		<ul> 
-		<li><h3><a href="#Description"> 1 Description</a></h3></li>
-		<li><h3><a href="#VisualDesign"> 2 Visual Design</a></h3></li>
-		<li><h3><a href="#FS"> 3 Functional Specifications/Requirements</a></h3></li>
-		<li><h3><a href="#MS"> 4 Markup &amp; Style</a></h3></li>
-		<li><h3><a href="#LVP"> 5 Latest version of plug-in</a></h3></li>
-		<li><h3><a href="#OISBD"> 6 Open issues being discussed</a></h3></li>
-		</ul>
-<br/>
-<hr />
-    <div class="page-history">
-      Page history
-    
-        last edited
-    by <span id="page-editor">Michal Skackov</span> <span id="page-history-ago">1 day ago</span>
-    
-  </div>
+				<img src="./images/lp_jdm_source.png" alt="Source Tree"
+				name="source_tree" width="322" height="450" />
+			</a> <a href="./jdm_project.html#Map" class="transparency process"> <img
+				src="./images/lp_jdm_map.png" alt="Map" name="map" width="321"
+				height="450" /></a> <a href="./jdm_project.html#Target"
+				class="transparency process"> <img
+				src="./images/lp_jdm_target.png" alt="Target Tree"
+				name="target_tree" width="324" height="450" /></a> <br />
 
 
-    <div id="wikipage" class="box wikistyle">
+			<div id="wikicontent">
+				<a name="Project_Page"></a>
+				<h1 class="pagetitle box">The jQuery Direct Map Project</h1>
+				<hr />
+				<br />
+				<h2>Project Content</h2>
+				<ul>
+					<li><h3>
+							<a href="#Description"> 1 Description</a>
+						</h3></li>
+					<li><h3>
+							<a href="#VisualDesign"> 2 Visual Design</a>
+						</h3></li>
+					<li><h3>
+							<a href="#FS"> 3 Functional Specifications/Requirements</a>
+						</h3></li>
+					<li><h3>
+							<a href="#MS"> 4 Markup &amp; Style</a>
+						</h3></li>
+					<li><h3>
+							<a href="#LVP"> 5 Latest version of plug-in</a>
+						</h3></li>
+					<li><h3>
+							<a href="#OISBD"> 6 Open issues being discussed</a>
+						</h3></li>
+				</ul>
+				<br />
+				<hr />
+				<div class="page-history">
+					Page history last edited by <span id="page-editor">Michal
+						Skackov</span> <span id="page-history-ago">1 day ago</span>
+
+				</div>
 
 
-
-    <div style="" id="wikipage-inner">
-
-    <p>&nbsp;</p>
-<p><span style="font-size:85%;"><strong>type:</strong> widget</span></p>
-<p><span style="font-size:85%;"><strong>release:</strong> 0.9</span></p>
-<p><span style="font-size:85%;"><strong>status:</strong> in progress</span></p>
-<p><span style="font-size:85%;"><strong>documentation:</strong> <a href="./jdm_resources.html">  http://directmapping.appspot.com/jdirectmap/jdm_resources.html</a></span></p>
-<p><span style="font-size:85%;"><strong>demo:</strong> <a href="./jdm_demo.html"> http://directmapping.appspot.com/jdirectmap/jdm_demo.html</a></span></p>
-<p><span style="font-size:85%;">&nbsp;</span></p>
-<p><span style="display:none;">&nbsp;</span></p>
-<hr /><h2>&nbsp;</h2>
-<a name="Description"></a>
-<h3><span style="color:#333333;">1 - Description:</span></h3>
-<p>&nbsp;</p>
-<p>The jQuery Direct Map or jDirectMap is a project to enable users to relate two different structural data sets.
- To support clear design and optimize performance for hierarchical structure, combination of spindown with tree control is used to selectively hide and show information or nodes.
- The simplest form is a spindown or disclosure triangle which is used to hide or show a single block of information.
- A set of these stacked together is referred to as a tree control. More information on UI guidelines:</p>
- <p><a href="https://developer.apple.com/library/mac/#documentation/UserExperience/Conceptual/AppleHIGuidelines/UEGuidelines/UEGuidelines.html#//apple_ref/doc/uid/TP40002720-TPXREF101">Apple UI guidelines</a></p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>Currently the jQuery UI Tree plugin is in development, but not yet documented (as it's not part of a jQuery UI release). is a tree page on the UI documentation wiki page with more details about the project:</p>
-<p><a href="http://wiki.jqueryui.com/w/page/12138128/Tree">jQuery Tree project</a></p>
-<p>&nbsp;</p>
-<p>As part of this project a wide research on currently available jQuery tree plug-ins was conducted. Results (full report to be published shortly) shown that there are fairly robust plugins with lots of features to consider:</p>
-<p><a href="http://code.google.com/p/dynatree/">DynaTree</a></p>
-<p><a href="http://www.jstree.com/">jsTree</a></p>
-<p><a href="http://www.baby666.cn/v3/main.php#_zTreeInfo/">zTree</a></p>
-<p>&nbsp;</p>
-<p>As part of the project all of these major plugins will be considered and implemented in demo. The plan is to implement basic versions extending each of these tree plugins and leave the selection process to the user. 
-Certain minimal requirements and functional specification with precondition need to be defined and followed in each version.</p>
-<p>&nbsp;</p>
-<hr /> 
-
-<a name="Source"></a>
-<div>
-<div id="imgleft" style="align: left">
-
-			<a href="#Source" class="transparency process">
-			<img src="./images/lp_jdm_source.png" alt="Source Tree" name="source_tree" width="322" height="450"/></a>
-		
-</div>	
-<div id="textright" style="align: right">
-<br/>
-<h3>Source</h3>
-<br/>
-<br/>
-The input element to define the data structure and visualize content of the source object.
-
-<br/><br/>
-Tree structure is currently most common way how to show large content and enable to selection and extended inspection of the data.
-Collapsing or extending tree is enables user to easy navigate through the structure. 
-<br/><br/>
-As the project is aim to be cloud ready a web based technologies are used for the user interface.
-In the first demo jQuery as the leading java script library is researched.
-<br/><br/>
-Following tree plugins passed the selection process and are used for the initial phase demo
-<p>&nbsp;</p>
-<p><a href="http://code.google.com/p/dynatree/">DynaTree</a></p>
-<p><a href="http://www.jstree.com/">jsTree</a></p>
-<p><a href="http://www.baby666.cn/v3/main.php#_zTreeInfo/">zTree</a></p>
-<p>&nbsp;</p>
-
-<br/>
-As input following format are planned to be accepted : <br/><br/>
-<ul>
-<li>XML</li>
-<li>JSON</li>
-</ul>
-<br/><br/>
-Please see the  <a href="./jdm_demo.html">demo page</a>  for current implementations.
-<br/><br/>
-<hr />
-</div>	
-</div>
-<a name="Map"></a>
-<div>
-
-<div id="imgleft" style="align: left">
-	<a href="#Map" class="transparency process">
-			<img src="./images/lp_jdm_map.png" alt="Map" name="map" width="321" height="450"/></a>
-
-</div>	
-<div id="textright" style="align: right">
-<br/> <h3>Map</h3>
-<br/>
-The element to enable create and persist relation between source and destination.
-Various objects with different object structure have common information. In order to enable to link those an mapping object is designed
-to enable user easy and quickly understand the common parts. There are two main components of this element.
-<br/><br/>
-<p>Map showing from to relation</p><br/><br/>
-<p>Function map enabling do define specific transformation</p>
-
-<br/><br/>
-Map requires basic CRUD (create-read-update-delete) functionality.
-<br/><br/><br/>
-Please see the  <a href="./jdm_demo.html">demo page</a>  for current implementations.
-<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-<hr />
-
-</div>	
-</div>
-<a name="Destination"></a>
-<div>
-<div id="imgleft" style="align: left">
-<a href="#Destination" class="transparency process">
-			<img src="./images/lp_jdm_destination.png" alt="Detination Tree" name="destination_tree" width="324" height="450"/>
-			</a>
-
-</div>	
-<div id="textright" style="align: right">
- <br/>
- <h3>Destination</h3>
-<br/>
-The input element to define the data structure and visualise content of the destination object.
-<br/><br/>
-Tree structure is currently most common way how to show large content and enable to selection and extended inspection of the data.
-Collapsing or extending tree is enables user to easy navigate trhough the structure. 
-<br/><br/>
-As the project is aim to be cloud ready a web based technologies are used for the user interface.
-In the first demo jQuery as the leading java script library is researched.
-<br/><br/>
-Following tree plugins passed the selection process and are used for the intial phase demo
-<p>&nbsp;</p>
-<p><a href="http://code.google.com/p/dynatree/">DynaTree</a></p>
-<p><a href="http://www.jstree.com/">jsTree</a></p>
-<p><a href="http://www.baby666.cn/v3/main.php#_zTreeInfo/">zTree</a></p>
-<p>&nbsp;</p>
-
-<br/>
-As input following format are planned to be accepted : <br/><br/>
-<ul>
-<li>XML</li>
-<li>JSON</li>
-</ul>
-<br/><br/>
-Please see the  <a href="./jdm_demo.html">demo page</a>  for current implementations.
-<br/><br/>
-</div>	
-</div>
-			
-
-<hr /><h3>&nbsp;</h3>
-<a name="VisualDesign"></a>
-<h3><span style="color:#333333;">2 - Visual Design:</span></h3>
-<p>&nbsp;</p>
-<p>Comprehesive comparasion of currently avaiable tools on the market with the technical limitations considered in visual design prototypes.</p>
-<p>&nbsp;</p>
-<hr /><p>&nbsp;</p>
-<h3>&nbsp;</h3>
-<a name="FS"></a>
-<h3><span style="color:#333333;">3 - Functional Specifications/Requirements:</span></h3>
-<p>&nbsp;</p>
-<p>(Detailed description of how the script will be structured: defaults, options, architecture, extensibility, etc.)</p>
-<p>&nbsp;</p>
-<hr /><h3>&nbsp;</h3>
-<a name="MS"></a>
-<h3><span style="color:#333333;">4 - Markup &amp; Style:</span></h3>
-<p>&nbsp;</p>
-<h4>&nbsp;&nbsp;&nbsp;&nbsp; 4.1 Initial markup examples</h4>
-<p>&nbsp;</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp; (Pre-enhanced HTML&nbsp;markup structure that will be transformed into the final widget.)</p>
-<p>&nbsp;</p>
-<h4>&nbsp;&nbsp;&nbsp;&nbsp; 4.2 Recommended transformed HTML markup</h4>
-<p>&nbsp;</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(The HTML markup structure and classes that will be used by the scripts in the enhanced version)&nbsp;</p>
-<p>&nbsp;</p>
-<h4>&nbsp;&nbsp;&nbsp;&nbsp; 4.3 Accessibility recommendation</h4>
-<p>&nbsp;</p>
-<p>&nbsp;&nbsp;&nbsp; (Detailed recommendations for ARIA, HTML markup, CSS and javascript that will contribute to universal access and full section 508 accessibility for screen readers, mobile devices and any other devices)&nbsp;</p>
-<p>&nbsp;</p>
-<h4>&nbsp;&nbsp;&nbsp;&nbsp; 4.4 CSS &amp; Theme</h4>
-<p>&nbsp;</p>
-<p>&nbsp;&nbsp;&nbsp; (Description of the CSS classes to be used for all states, how custom theming and Themeroller support will work.)&nbsp;</p>
-<p>&nbsp;</p>
-<hr /><h3>&nbsp;</h3>
-<a name="LVP"></a>
-<h3><span style="color:#333333;">5 - Latest version of plugin:</span></h3>
-<p>&nbsp;</p>
-<p>Project is hosted under GitHub.</p>  <p><a href="https://github.com/directmapping/jDirectMap">jDirectMap on GitHub</a></p> 
-<p>&nbsp;</p>
-<hr /><p>&nbsp;</p>
-<a name="OISBD"></a>
-<h3><span style="color:#333333;">6 - Open issues being discussed:</span></h3>
-<p>&nbsp;</p>
-<p>(Use this area to place things that we're hashing out like features and options we're not sure we should include, questions about how this fits into UI and relates to other widgets and utilities, known problems, whether features should be broken across multiple releases, etc.)</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-
-<ul>
-<li>Design features as highlight of active elements, highlight the source and destination based on the row.</li>
-<li>Autoscroll options. what happens if the tree is too long (wide,  tall)</li>
-<li>Add collapse all button</li>
-<li>Enable to customize icons and styles / theme of the grid and trees</li>
-<li>How To design and integrate functions.</li>
-<li>JSON source and destination</li>
-<li>Which features should be built-in and which should be handled manually or via extensions</li>
-<li>What should the API be</li>
-<li>For the features we decide not to build-in, what extension points and hooks do we provide in the DOM and in the API to ensure those features can reasonably be built on top</li>
-
-</ul><p>&nbsp;</p>
-<p>&nbsp;</p>
-<hr /><p>&nbsp;</p>
-<h2>&nbsp;</h2>
-<h2>&nbsp;</h2>
-<p>&nbsp;</p>
-
-    </div>
-
-  
-
-  </div>
+				<div id="wikipage" class="box wikistyle">
 
 
 
-  </div>
+					<div style="" id="wikipage-inner">
+
+						<p>&nbsp;</p>
+						<p>
+							<span style="font-size: 85%;"><strong>type:</strong>
+								widget</span>
+						</p>
+						<p>
+							<span style="font-size: 85%;"><strong>release:</strong>
+								0.9</span>
+						</p>
+						<p>
+							<span style="font-size: 85%;"><strong>status:</strong> in
+								progress</span>
+						</p>
+						<p>
+							<span style="font-size: 85%;"><strong>documentation:</strong>
+								<a href="./jdm_resources.html">
+									http://directmapping.appspot.com/jdirectmap/jdm_resources.html</a></span>
+						</p>
+						<p>
+							<span style="font-size: 85%;"><strong>demo:</strong> <a
+								href="./jdm_demo.html">
+									http://directmapping.appspot.com/jdirectmap/jdm_demo.html</a></span>
+						</p>
+						<p>
+							<span style="font-size: 85%;">&nbsp;</span>
+						</p>
+						<p>
+							<span style="display: none;">&nbsp;</span>
+						</p>
+						<hr />
+						<h2>&nbsp;</h2>
+						<a name="Description"></a>
+						<h3>
+							<span style="color: #333333;">1 - Description:</span>
+						</h3>
+						<p>&nbsp;</p>
+						<p>The jQuery Direct Map or jDirectMap is a project to enable
+							users to relate two different structural data sets. To support
+							clear design and optimize performance for hierarchical structure,
+							combination of spindown with tree control is used to selectively
+							hide and show information or nodes. The simplest form is a
+							spindown or disclosure triangle which is used to hide or show a
+							single block of information. A set of these stacked together is
+							referred to as a tree control. More information on UI guidelines:</p>
+						<p>
+							<a
+								href="https://developer.apple.com/library/mac/#documentation/UserExperience/Conceptual/AppleHIGuidelines/UEGuidelines/UEGuidelines.html#//apple_ref/doc/uid/TP40002720-TPXREF101">Apple
+								UI guidelines</a>
+						</p>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+						<p>Currently the jQuery UI Tree plugin is in development, but
+							not yet documented (as it's not part of a jQuery UI release). is
+							a tree page on the UI documentation wiki page with more details
+							about the project:</p>
+						<p>
+							<a href="http://wiki.jqueryui.com/w/page/12138128/Tree">jQuery
+								Tree project</a>
+						</p>
+						<p>&nbsp;</p>
+						<p>As part of this project a wide research on currently
+							available jQuery tree plug-ins was conducted. Results (full
+							report to be published shortly) shown that there are fairly
+							robust plugins with lots of features to consider:</p>
+						<p>
+							<a href="http://code.google.com/p/dynatree/">DynaTree</a>
+						</p>
+						<p>
+							<a href="http://www.jstree.com/">jsTree</a>
+						</p>
+						<p>
+							<a href="http://www.baby666.cn/v3/main.php#_zTreeInfo/">zTree</a>
+						</p>
+						<p>&nbsp;</p>
+						<p>As part of the project all of these major plugins will be
+							considered and implemented in demo. The plan is to implement
+							basic versions extending each of these tree plugins and leave the
+							selection process to the user. Certain minimal requirements and
+							functional specification with precondition need to be defined and
+							followed in each version.</p>
+						<p>&nbsp;</p>
+						<hr />
+
+						<a name="Source"></a>
+						<div>
+							<div id="imgleft" style="align: left">
+
+								<a href="#Source" class="transparency process"> <img
+									src="./images/lp_jdm_source.png" alt="Source Tree"
+									name="source_tree" width="322" height="450" /></a>
+
+							</div>
+							<div id="textright" style="align: right">
+								<br />
+								<h3>Source</h3>
+								<br /> <br /> The input element to define the data structure and
+								visualize content of the source object. <br />
+								<br /> Tree structure is currently most common way how to show
+								large content and enable to selection and extended inspection of
+								the data. Collapsing or extending tree is enables user to easy
+								navigate through the structure. <br />
+								<br /> As the project is aim to be cloud ready a web based
+								technologies are used for the user interface. In the first demo
+								jQuery as the leading java script library is researched. <br />
+								<br /> Following tree plugins passed the selection process and
+								are used for the initial phase demo
+								<p>&nbsp;</p>
+								<p>
+									<a href="http://code.google.com/p/dynatree/">DynaTree</a>
+								</p>
+								<p>
+									<a href="http://www.jstree.com/">jsTree</a>
+								</p>
+								<p>
+									<a href="http://www.baby666.cn/v3/main.php#_zTreeInfo/">zTree</a>
+								</p>
+								<p>&nbsp;</p>
+
+								<br /> As input following format are planned to be accepted : <br />
+								<br />
+								<ul>
+									<li>XML</li>
+									<li>JSON</li>
+								</ul>
+								<br />
+								<br /> Please see the <a href="./jdm_demo.html">demo page</a>
+								for current implementations. <br />
+								<br />
+								<hr />
+							</div>
+						</div>
+						<a name="Map"></a>
+						<div>
+
+							<div id="imgleft" style="align: left">
+								<a href="#Map" class="transparency process"> <img
+									src="./images/lp_jdm_map.png" alt="Map" name="map" width="321"
+									height="450" /></a>
+
+							</div>
+							<div id="textright" style="align: right">
+								<br />
+								<h3>Map</h3>
+								<br /> The element to enable create and persist relation between
+								source and destination. Various objects with different object
+								structure have common information. In order to enable to link
+								those an mapping object is designed to enable user easy and
+								quickly understand the common parts. There are two main
+								components of this element. <br />
+								<br />
+								<p>Map showing from to relation</p>
+								<br />
+								<br />
+								<p>Function map enabling do define specific transformation</p>
+
+								<br />
+								<br /> Map requires basic CRUD (create-read-update-delete)
+								functionality. <br />
+								<br />
+								<br /> Please see the <a href="./jdm_demo.html">demo page</a>
+								for current implementations. <br />
+								<br />
+								<br />
+								<br />
+								<br />
+								<br />
+								<br />
+								<br />
+								<br />
+								<br />
+								<br />
+								<br />
+								<hr />
+
+							</div>
+						</div>
+						<a name="Target"></a>
+						<div>
+							<div id="imgleft" style="align: left">
+								<a href="#Target" class="transparency process"> <img
+									src="./images/lp_jdm_destination.png" alt="Detination Tree"
+									name="destination_tree" width="324" height="450" />
+								</a>
+
+							</div>
+							<div id="textright" style="align: right">
+								<br />
+								<h3>Target</h3>
+								<br /> The input element to define the data structure and
+								visualise content of the destination object. <br />
+								<br /> Tree structure is currently most common way how to show
+								large content and enable to selection and extended inspection of
+								the data. Collapsing or extending tree is enables user to easy
+								navigate trhough the structure. <br />
+								<br /> As the project is aim to be cloud ready a web based
+								technologies are used for the user interface. In the first demo
+								jQuery as the leading java script library is researched. <br />
+								<br /> Following tree plugins passed the selection process and
+								are used for the intial phase demo
+								<p>&nbsp;</p>
+								<p>
+									<a href="http://code.google.com/p/dynatree/">DynaTree</a>
+								</p>
+								<p>
+									<a href="http://www.jstree.com/">jsTree</a>
+								</p>
+								<p>
+									<a href="http://www.baby666.cn/v3/main.php#_zTreeInfo/">zTree</a>
+								</p>
+								<p>&nbsp;</p>
+
+								<br /> As input following format are planned to be accepted : <br />
+								<br />
+								<ul>
+									<li>XML</li>
+									<li>JSON</li>
+								</ul>
+								<br />
+								<br /> Please see the <a href="./jdm_demo.html">demo page</a>
+								for current implementations. <br />
+								<br />
+							</div>
+						</div>
+
+
+						<hr />
+						<h3>&nbsp;</h3>
+						<a name="VisualDesign"></a>
+						<h3>
+							<span style="color: #333333;">2 - Visual Design:</span>
+						</h3>
+						<p>&nbsp;</p>
+						<p>Comprehesive comparasion of currently avaiable tools on the
+							market with the technical limitations considered in visual design
+							prototypes.</p>
+						<p>&nbsp;</p>
+						<hr />
+						<p>&nbsp;</p>
+						<h3>&nbsp;</h3>
+						<a name="FS"></a>
+						<h3>
+							<span style="color: #333333;">3 - Functional
+								Specifications/Requirements:</span>
+						</h3>
+						<p>&nbsp;</p>
+						<p>(Detailed description of how the script will be structured:
+							defaults, options, architecture, extensibility, etc.)</p>
+						<p>&nbsp;</p>
+						<hr />
+						<h3>&nbsp;</h3>
+						<a name="MS"></a>
+						<h3>
+							<span style="color: #333333;">4 - Markup &amp; Style:</span>
+						</h3>
+						<p>&nbsp;</p>
+						<h4>&nbsp;&nbsp;&nbsp;&nbsp; 4.1 Initial markup examples</h4>
+						<p>&nbsp;</p>
+						<p>&nbsp;&nbsp;&nbsp;&nbsp; (Pre-enhanced HTML&nbsp;markup
+							structure that will be transformed into the final widget.)</p>
+						<p>&nbsp;</p>
+						<h4>&nbsp;&nbsp;&nbsp;&nbsp; 4.2 Recommended transformed HTML
+							markup</h4>
+						<p>&nbsp;</p>
+						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(The HTML markup structure
+							and classes that will be used by the scripts in the enhanced
+							version)&nbsp;</p>
+						<p>&nbsp;</p>
+						<h4>&nbsp;&nbsp;&nbsp;&nbsp; 4.3 Accessibility recommendation</h4>
+						<p>&nbsp;</p>
+						<p>&nbsp;&nbsp;&nbsp; (Detailed recommendations for ARIA, HTML
+							markup, CSS and javascript that will contribute to universal
+							access and full section 508 accessibility for screen readers,
+							mobile devices and any other devices)&nbsp;</p>
+						<p>&nbsp;</p>
+						<h4>&nbsp;&nbsp;&nbsp;&nbsp; 4.4 CSS &amp; Theme</h4>
+						<p>&nbsp;</p>
+						<p>&nbsp;&nbsp;&nbsp; (Description of the CSS classes to be
+							used for all states, how custom theming and Themeroller support
+							will work.)&nbsp;</p>
+						<p>&nbsp;</p>
+						<hr />
+						<h3>&nbsp;</h3>
+						<a name="LVP"></a>
+						<h3>
+							<span style="color: #333333;">5 - Latest version of
+								plugin:</span>
+						</h3>
+						<p>&nbsp;</p>
+						<p>Project is hosted under GitHub.</p>
+						<p>
+							<a href="https://github.com/directmapping/jDirectMap">jDirectMap
+								on GitHub</a>
+						</p>
+						<p>&nbsp;</p>
+						<hr />
+						<p>&nbsp;</p>
+						<a name="OISBD"></a>
+						<h3>
+							<span style="color: #333333;">6 - Open issues being
+								discussed:</span>
+						</h3>
+						<p>&nbsp;</p>
+						<p>(Use this area to place things that we're hashing out like
+							features and options we're not sure we should include, questions
+							about how this fits into UI and relates to other widgets and
+							utilities, known problems, whether features should be broken
+							across multiple releases, etc.)</p>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+
+						<ul>
+							<li>Design features as highlight of active elements,
+								highlight the source and destination based on the row.</li>
+							<li>Autoscroll options. what happens if the tree is too long
+								(wide, tall)</li>
+							<li>Enable to customize icons and styles / theme of the grid
+								and trees</li>
+							<li>How To design and integrate functions.</li>
+							<li>JSON source and destination</li>
+							<li>Which features should be built-in and which should be
+								handled manually or via extensions</li>
+							<li>What should the API be</li>
+							<li>For the features we decide not to build-in, what
+								extension points and hooks do we provide in the DOM and in the
+								API to ensure those features can reasonably be built on top</li>
+
+						</ul>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+						<hr />
+						<p>&nbsp;</p>
+						<h2>&nbsp;</h2>
+						<h2>&nbsp;</h2>
+						<p>&nbsp;</p>
+
+					</div>
+
+
+
+				</div>
+
+
+
+			</div>
 
 		</div>
 		<div id="containerBottom"></div>
-		<div id="layerfooter"><img id="layerfooterimg" src="./images/footer.png" width="1150" alt="Footer logos"/></div>
+		<div id="layerfooter">
+			<img id="layerfooterimg" src="./images/footer.png" width="1150"
+				alt="Footer logos" />
+		</div>
 	</div>
 
-	
+
 </body>
 </html>

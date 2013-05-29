@@ -322,28 +322,7 @@
 					}	
 					
 				 });
-				 
-	$("#import").click(function(){
-					// get IDs of all the rows odf jqGrid 
-					var rowIds = $table.jqGrid('getDataIDs');
-					// iterate through the rows and delete each of them
-					for(var i=0,len=rowIds.length;i<len;i++){
-						var currRow = rowIds[i];
-						$table.jqGrid('delRowData', currRow);
-					}	
-					$("form").show();
-					//$("#mapping_main").hide();
-				 });
-				 			 
-	$("#export").click(function(){
-					alert("Check out https://github.com/dcneiner/Downloadify ");
-					
-					helper_grid();
-					
-					$.download('customer.json','filename=mySpreadsheet&format=json&content=' + $table );
-
-
-				 });				
+	
 				 
 	$("#moveup").click(function(){
 				   move('up');

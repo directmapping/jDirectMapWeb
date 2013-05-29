@@ -6,16 +6,18 @@
          xmlns="http://java.sun.com/xml/ns/javaee">
 
   <!-- Servlets -->
-  <servlet>
-    <servlet-name>greetServlet</servlet-name>
-    <servlet-class>directmapping.server.GreetingServiceImpl</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-    <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/directmapping/greet</url-pattern>
-  </servlet-mapping>
-  
+
+	<servlet>
+		<description>XML Input Servlet</description>
+		<servlet-name>input</servlet-name>
+		<servlet-class>org.milyn.smooks.directmapping.gae.InputServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>input</servlet-name>
+		<url-pattern>/input</url-pattern>
+	</servlet-mapping>
+
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>jdm_index.html</welcome-file>
