@@ -263,7 +263,13 @@ jDirectMapTreeProcessor.prototype.vsTraverse = function(node, arr , parent){
 		}
 		// else there are no children ie element is leaf 
 		else{
-			 arr.push([{"data":_ch[i].nodeName, "attr" : { "id" : parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName }}]);
+			  if(null!=_vsArr){
+				  arr.push([{"data":_ch[i].nodeName, "attr" : { "id" : parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName }, "children":_vsArr, "state":"close"}]);
+			  }
+			  else{
+				  arr.push([{"data":_ch[i].nodeName, "attr" : { "id" : parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName }}]);
+			  
+			  }
 		}
 	}	
 }

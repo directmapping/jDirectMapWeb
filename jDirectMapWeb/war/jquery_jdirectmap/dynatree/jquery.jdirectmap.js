@@ -5,102 +5,99 @@
 						
 						
 						$("#source_xml_area").val("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>	<shiporder orderid=\"889923\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:noNamespaceSchemaLocation=\"shiporder.xsd\"><orderperson>John Smith</orderperson>							  <shipto>							    <name>Ola Nordmann</name>							    <address>Langgt 23</address>							    <city>4000 Stavanger</city>							    <country>Norway</country>							  </shipto>							  <item>							    <title>Empire Burlesque</title>							    <note>Special Edition</note>							    <quantity>1</quantity>							    <price>10.90</price>							  </item>							  <item>							    <title>Hide your heart</title>							    <quantity>1</quantity>							    <price>9.90</price>							  </item>							</shiporder>");
-						$("#dest_xml_area").val("<?xml version=\"1.0\"?> " +
-								" <catalog> " +
-								"  <book id=\"bk101\"> " +
-								"   <author>Gambardella, Matthew</author> <title>XML Developer's Guide</title>  <genre>Computer</genre>   <price>44.95</price>    <publish_date>2000-10-01</publish_date>" +
-								"      <description>An in-depth look at creating applications with XML.</description>   </book>   <book id=\"bk102\">  <author>Ralls, Kim</author>    <title>Midnight Rain</title>  <genre>Fantasy</genre>   <price>5.95</price>    <publish_date>2000-12-16</publish_date>    <description>A former architect battles corporate zombies,an evil sorceress, and her own childhood to become queen of the world.</description>  </book>  <book id=\"bk103\">	" +
-								"   <author>Corets, Eva</author> <title>Maeve Ascendant</title>   <genre>Fantasy</genre><price>5.95</price> <publish_date>2000-11-17</publish_date><description>After the collapse of a nanotechnology						      society in England, the young survivors lay the						      foundation for a new society.</description>" +
-						  " </book> " +
-						  " <book id= \"bk104\"> " +
-						   "   <author>Corets, Eva</author> " +
-						    "  <title>Oberon's Legacy</title> " +
-						     " <genre>Fantasy</genre> " +
-						      "<price>5.95</price> " +
-						    "  <publish_date>2001-03-10</publish_date> " +
-						    "  <description>In post-apocalypse England, the mysterious " + 
-						    "  agent known only as Oberon helps to create a new life " + 
-						    "  for the inhabitants of London. Sequel to Maeve " + 
-						    "  Ascendant.</description> " +
-						  " </book> " +
-						   " <book id=\"bk105\"> " +
-						     " <author>Corets, Eva</author> " +
-						      " <title>The Sundered Grail</title> " +
-						     " <genre>Fantasy</genre> " +
-						     " <price>5.95</price> " +
-						     " <publish_date>2001-09-10</publish_date> " +
-						     " <description>The two daughters of Maeve, half-sisters, " + 
-						     " battle one another for control of England. Sequel to " + 
-						     " Oberon's Legacy.</description> " +
-						  " </book> " +
-						  " <book id=\"bk106\"> " +
-						  "    <author>Randall, Cynthia</author> " +
-						  "    <title>Lover Birds</title> " +
-						  "    <genre>Romance</genre> " +
-						  "    <price>4.95</price> " +
-						  "    <publish_date>2000-09-02</publish_date> " +
-						  "    <description>When Carla meets Paul at an ornithology " + 
-						  "    conference, tempers fly as feathers get ruffled.</description> " +
-						  " </book> " +
-						  " <book id=\"bk107\"> " +
-						  "    <author>Thurman, Paula</author> " +
-						  "    <title>Splish Splash</title> " +
-						  "    <genre>Romance</genre> " +
-						  "    <price>4.95</price> " +
-						  "    <publish_date>2000-11-02</publish_date> " +
-						  "    <description>A deep sea diver finds true love twenty " + 
-						  "    thousand leagues beneath the sea.</description> " +
-						  " </book> " +
-						  " <book id=\"bk108\"> " +
-						  "    <author>Knorr, Stefan</author> " +
-						  "    <title>Creepy Crawlies</title> " +
-						  "    <genre>Horror</genre> " +
-						  "    <price>4.95</price> " +
-						  "    <publish_date>2000-12-06</publish_date> " +
-						  "    <description>An anthology of horror stories about roaches, " +
-						  "    centipedes, scorpions  and other insects.</description> " +
-						  " </book> " +
-						  " <book id=\"bk109\"> " +
-						  "    <author>Kress, Peter</author> " +
-						  "    <title>Paradox Lost</title> " +
-						  "    <genre>Science Fiction</genre> " +
-						  "    <price>6.95</price> " +
-						  "    <publish_date>2000-11-02</publish_date> " +
-						  "    <description>After an inadvertant trip through a Heisenberg " +
-						  "    Uncertainty Device, James Salway discovers the problems " + 
-						  "    of being quantum.</description> " +
-						  " </book> " +
-						  " <book id=\"bk110\"> " +
-						  "    <author>O'Brien, Tim</author> " +
-						  "    <title>Microsoft .NET: The Programming Bible</title> " +
-						  "    <genre>Computer</genre> " +
-						  "    <price>36.95</price> " +
-						  "    <publish_date>2000-12-09</publish_date> " +
-						  "    <description>Microsoft's .NET initiative is explored in  " +
-						  "    detail in this deep programmer's reference.</description> " +
-						  " </book> " +
-						  " <book id=\"bk111\"> " +
-						  "    <author>O'Brien, Tim</author> " +
-						  "    <title>MSXML3: A Comprehensive Guide</title> " +
-						  "    <genre>Computer</genre> " +
-						  "    <price>36.95</price> " +
-						  "    <publish_date>2000-12-01</publish_date> " +
-						  "    <description>The Microsoft MSXML3 parser is covered in  " +
-						  "    detail, with attention to XML DOM interfaces, XSLT processing, " + 
-						  "    SAX and more.</description> " +
-						  " </book> " +
-						  " <book id=\"bk112\"> " +
-						  "    <author>Galos, Mike</author> " +
-						  "    <title>Visual Studio 7: A Comprehensive Guide</title> " +
-						  "    <genre>Computer</genre> " +
-						  "    <price>49.95</price> " +
-						  "    <publish_date>2001-04-16</publish_date> " +
-						  "    <description>Microsoft Visual Studio 7 is explored in depth, " +
-						  "    looking at how Visual Basic, Visual C++, C#, and ASP+ are " + 
-						  "    integrated into a comprehensive development " + 
-						  "    environment.</description> " +
-						  " </book> " +
-						" </catalog> " );
+						$("#dest_xml_area").val(						"<?xml version=\"1.0\"?>" +
+"<PurchaseOrders>" +
+  "<PurchaseOrder PurchaseOrderNumber=\"99503\" OrderDate=\"1999-10-20\">" +
+    "<Address Type=\"Shipping\">" +
+     " <Name>Ellen Adams</Name>" +
+      "<Street>123 Maple Street</Street>" +
+     " <City>Mill Valley</City>" +
+      "<State>CA</State>" +
+     " <Zip>10999</Zip>" +
+    "  <Country>USA</Country>" +
+   " </Address>" +
+   " <Address Type=\"Billing\">" +
+      "<Name>Tai Yee</Name>" +
+      "<Street>8 Oak Avenue</Street>" +
+      "<City>Old Town</City>" +
+      "<State>PA</State>" +
+      "<Zip>95819</Zip>" +
+     " <Country>USA</Country>" +
+    "</Address>" +
+    "<DeliveryNotes>Please leave packages in shed by driveway.</DeliveryNotes>" +
+    "<Items>" +
+      "<Item PartNumber=\"872-AA\">" +
+        "<ProductName>Lawnmower</ProductName>" +
+       " <Quantity>1</Quantity>" +
+      "  <USPrice>148.95</USPrice>" +
+      "  <Comment>Confirm this is electric</Comment>" +
+      "</Item>" +
+      "<Item PartNumber=\"926-AA\">" +
+        "<ProductName>Baby Monitor</ProductName>" +
+       " <Quantity>2</Quantity>" +
+       " <USPrice>39.98</USPrice>" +
+       " <ShipDate>1999-05-21</ShipDate>" +
+      "</Item>" +
+    "</Items>" +
+  "</PurchaseOrder>" +
+  "<PurchaseOrder PurchaseOrderNumber=\"99505\" OrderDate=\"1999-10-22\">" +
+    "<Address Type=\"Shipping\">" +
+      "<Name>Cristian Osorio</Name>" +
+      "<Street>456 Main Street</Street>" +
+      "<City>Buffalo</City>" +
+      "<State>NY</State>" +
+      "<Zip>98112</Zip>" +
+     " <Country>USA</Country>" +
+   " </Address>" +
+    "<Address Type=\"Billing\">" +
+      "<Name>Cristian Osorio</Name>" +
+      "<Street>456 Main Street</Street>" +
+      "<City>Buffalo</City>" +
+      "<State>NY</State>" +
+      "<Zip>98112</Zip>" +
+      "<Country>USA</Country>" +
+    "</Address>" +
+    "<DeliveryNotes>Please notify me before shipping.</DeliveryNotes>" +
+    "<Items>" +
+      "<Item PartNumber=\"456-NM\">" +
+        "<ProductName>Power Supply</ProductName>" +
+        "<Quantity>1</Quantity>" +
+        "<USPrice>45.99</USPrice>" +
+      "</Item>" +
+    "</Items>" +
+ " </PurchaseOrder>" +
+ " <PurchaseOrder PurchaseOrderNumber=\"99504\" OrderDate=\"1999-10-22\">" +
+    "<Address Type=\"Shipping\">" +
+      "<Name>Jessica Arnold</Name>" +
+      "<Street>4055 Madison Ave</Street>" +
+      "<City>Seattle</City>" +
+      "<State>WA</State>" +
+     " <Zip>98112</Zip>" +
+     " <Country>USA</Country>" +
+   " </Address>" +
+   " <Address Type=\"Billing\">" +
+      "<Name>Jessica Arnold</Name>" +
+      "<Street>4055 Madison Ave</Street>" +
+      "<City>Buffalo</City>" +
+      "<State>NY</State>" +
+      "<Zip>98112</Zip>" +
+      "<Country>USA</Country>" +
+    "</Address>" +
+    "<Items>" +
+      "<Item PartNumber=\"898-AZ\">" +
+       " <ProductName>Computer Keyboard</ProductName>" +
+       " <Quantity>1</Quantity>" +
+       " <USPrice>29.99</USPrice>" +
+      "</Item>" +
+      "<Item PartNumber=\"898-AM\">" +
+      "  <ProductName>Wireless Mouse</ProductName>" +
+     "   <Quantity>1</Quantity>" +
+    "    <USPrice>14.99</USPrice>" +
+   "   </Item>" +
+  "  </Items>" +
+  "</PurchaseOrder>" +
+"</PurchaseOrders>" 
+ );
 						
 						
 						$("#xmlsubmit").click(function(){      

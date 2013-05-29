@@ -116,7 +116,7 @@ jDirectMapTreeProcessor.prototype.vsTraverse = function(node, arr , parent){
 		if(null!=_a_att){
 					_vsArr.push({ title: "Attributes "+"["+_ch[i].nodeName+"]", key: parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName + "[@*]" , children: _a_att});
 		}
-		//if element has children and frist child is XML DOM 3	TEXT_NODE
+		//if element has children and first child is XML DOM 3	TEXT_NODE
 		// format {data: Attributes [element] , attr : {id : /xpath/element}, 	children: [JSON _vsArr], state:close}
 		if(null!=_ch[i].firstChild && 3 ==_ch[i].firstChild.nodeType){
 				if(0 == _vsArr.length){
@@ -128,7 +128,12 @@ jDirectMapTreeProcessor.prototype.vsTraverse = function(node, arr , parent){
 		}
 		// else there are no children ie element is leaf 
 		else{
-			 arr.push({ title : _ch[i].nodeName, key: parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName });
+			  if(null!=_vsArr){
+					 arr.push({ title : _ch[i].nodeName, key: parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName ,  children: _vsArr,  expand: true ,isFolder: true});
+					 }else{
+					   arr.push({ title : _ch[i].nodeName, key: parent + "/" + _ch[i].parentNode.nodeName + "/" +_ch[i].nodeName });   
+					 }
+					 
 		}
 	}	
 }
