@@ -6,7 +6,7 @@ import java.util.List;
 public class MappingObject {
 
 	private String source;
-	  private String destination;
+	  private String target;
 	  private List<Mappings> mapping;
 	  private List<Functions> functions;
 
@@ -16,15 +16,15 @@ public class MappingObject {
 		  List<Mappings> mapping = new ArrayList<Mappings>();
 			
 		    this.source = "";
-		    this.destination =  "";
+		    this.target =  "";
 		    this.mapping = mapping;
 		    this.functions = functions;
 		  }
 	  
-	  public MappingObject(String source, String destination,  List<Mappings> mappings,  List<Functions> functions) {
+	  public MappingObject(String source, String target,  List<Mappings> mappings,  List<Functions> functions) {
 		   
 		    this.source = source;
-		    this.destination =  destination;
+		    this.target =  target;
 		    this.mapping = mappings;
 		    this.functions = functions;
 		  }
@@ -43,15 +43,15 @@ public class MappingObject {
 
 
 
-	public String getDestination() {
-		return destination;
+	public String getTarget() {
+		return target;
 	}
 
 
 
 
-	public void setDestination(String destination) {
-		this.destination = destination;
+	public void setTarget(String target) {
+		this.target = target;
 	}
 
 

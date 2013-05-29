@@ -39,12 +39,12 @@ public class InputServlet extends HttpServlet {
 		try {
 			
 			String sourceXML = URLDecoder.decode(req.getParameter("source"), "UTF-8");
-			String destinationXML = URLDecoder.decode(req.getParameter("destination"), "UTF-8");
+			String targetXML = URLDecoder.decode(req.getParameter("target"), "UTF-8");
 			
-			if (sourceXML != null && sourceXML.length() > 0 && destinationXML != null && destinationXML.length() > 0) {
+			if (sourceXML != null && sourceXML.length() > 0 && targetXML != null && targetXML.length() > 0) {
 				String sourcekey = storeXML(sourceXML, "sourceXML" );
-				String destinationkey = storeXML(destinationXML, "destinationXML" );
-				returnJSON(processXMLtoJSON(sourceXML), processXMLtoJSON(destinationXML),sourcekey, destinationkey, resp.getWriter());
+				String targetkey = storeXML(targetXML, "targetXML" );
+				returnJSON(processXMLtoJSON(sourceXML), processXMLtoJSON(targetXML),sourcekey, targetkey, resp.getWriter());
 			} else {
 				resp.sendRedirect("/");
 			}
@@ -63,13 +63,13 @@ public class InputServlet extends HttpServlet {
 	
 	
 	
-	private void returnJSON(String source, String destination, String sourceXMLKey, String destinationXMLKey, PrintWriter out) throws IOException, SAXException {
+	private void returnJSON(String source, String target, String sourceXMLKey, String targetXMLKey, PrintWriter out) throws IOException, SAXException {
 		
 		 JsonObject json = new JsonObject();
 		 json.addProperty("source", source);
-		 json.addProperty("destination", destination);
+		 json.addProperty("target", target);
 		 json.addProperty("sourceXML", sourceXMLKey);
-		 json.addProperty("destinationXML", destinationXMLKey);
+		 json.addProperty("targetXML", targetXMLKey);
 		 out.write(json.toString());
      		
 	}

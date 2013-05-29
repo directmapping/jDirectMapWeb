@@ -127,9 +127,9 @@ jDirectMapTreeProcessor.prototype.initTree = function(data,url,type){
 						id = "in" + id;
 						$("#" + parId).append("<span class='domBtn_source'   domId='" + treeId + treeNodes[0].id + "'>" +  id + ": " + treeNodes[0].xpath + "</span>");
 					}
-					else if(treeId == "tree_destination") {
+					else if(treeId == "tree_target") {
 						id = "out" + id;
-						$("#" + parId).append("<span class='domBtn_destination'   domId='" + treeId + treeNodes[0].id + "'>" +  id + ": " + treeNodes[0].xpath + "</span>");
+						$("#" + parId).append("<span class='domBtn_target'   domId='" + treeId + treeNodes[0].id + "'>" +  id + ": " + treeNodes[0].xpath + "</span>");
 						
 					}
 					
@@ -142,7 +142,7 @@ jDirectMapTreeProcessor.prototype.initTree = function(data,url,type){
 				if(treeId = "tree_source") {
 					alert("Input parameters accept only elements from source tree");
 				}
-				else if(treeId = "tree_destination") {
+				else if(treeId = "tree_target") {
 					alert("Ouput parameters accept only elements from detination tree");
 				}
 				else {
@@ -168,15 +168,15 @@ jDirectMapTreeProcessor.prototype.initTree = function(data,url,type){
 			
 					var numberOfRecords = jQuery("#mapping_list").getGridParam("records");
 					
-						if(type == "source" && treeId == "tree_destination") {
+						if(type == "source" && treeId == "tree_target") {
 								jQuery("#mapping_list").jqGrid('addRowData',++numberOfRecords,{id: numberOfRecords, sparam: treeNodes[0].xpath, dparam: targetNode.xpath  } );
 								$("#tree_source").find('a').removeClass($.fn.zTree.consts.node.CURSELECTED);
 								
 								
 						}
-						else if (type == "destination" && treeId == "tree_source") {
+						else if (type == "target" && treeId == "tree_source") {
 								jQuery("#mapping_list").jqGrid('addRowData',++numberOfRecords,{id: numberOfRecords, sparam: targetNode.xpath , dparam: treeNodes[0].xpath } );
-								$("#tree_destination").find('a').removeClass($.fn.zTree.consts.node.CURSELECTED);
+								$("#tree_target").find('a').removeClass($.fn.zTree.consts.node.CURSELECTED);
 							
 						}
 						

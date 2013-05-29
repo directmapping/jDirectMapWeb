@@ -133,7 +133,7 @@
 	function helper_read_xml(){
 
 			var jTreeSource = new jDirectMapTreeProcessor("TEXT",$("#source_xml_area").val(), $("#tree_source"),"source");
-			var jTreeDestination = new jDirectMapTreeProcessor("TEXT",$("#dest_xml_area").val(), $("#tree_destination"),"destination");
+			var jTreeTarget = new jDirectMapTreeProcessor("TEXT",$("#dest_xml_area").val(), $("#tree_target"),"target");
 		
 	}	
 	
@@ -143,7 +143,7 @@
 	var $table = $("#mapping_list");	
 	$table.jqGrid({        
 				datatype: "local",
-				colNames:['id','Source Parameter', 'Destination Parameter'],
+				colNames:['id','Source Parameter', 'Target Parameter'],
 				colModel:[
 					{name:'id',index:'id', width:1 , sortable: false},
 					{name:'sparam',index:'sparam', width:280 , sortable: false},
@@ -158,7 +158,7 @@
 					  if(id){ 
 						
 					
-						$("#tree_destination").dynatree("getRoot").visit(function(node){
+						$("#tree_target").dynatree("getRoot").visit(function(node){
 						    node.expand(true);
 						});
 						
@@ -167,7 +167,7 @@
 						});
 						
 						$("#tree_source").dynatree("getTree").getNodeByKey($table.getRowData(id).sparam).activate();
-						$("#tree_destination").dynatree("getTree").getNodeByKey($table.getRowData(id).dparam).activate();
+						$("#tree_target").dynatree("getTree").getNodeByKey($table.getRowData(id).dparam).activate();
 						
 						
 						
@@ -176,7 +176,7 @@
 				pager: '#gridpager'  // remove the data
 	});
 
-	$("#dom_tree_destination").droppable({
+	$("#dom_tree_target").droppable({
 	    hoverClass: "drophover",
 	    addClasses: true,
 	    over: function(event, ui) {
@@ -186,10 +186,10 @@
 	        var source = ui.helper.data("dtSourceNode") || ui.draggable;
 		    var domId = "dom_" + source.data.key;
 		    var parId = "par_" + source.data.key;
-				if (source.tree.$tree.attr('id') == "tree_destination") {
+				if (source.tree.$tree.attr('id') == "tree_target") {
 										
 					var match_param = 0;
-	        		$("#par_tree_destination").find("span").each(function() {
+	        		$("#par_tree_target").find("span").each(function() {
 							if(    this.attributes["domId"].value  == parId ) {
 							match_param++;
 							}					
@@ -197,15 +197,15 @@
 	        			});
 	     
 	        		if (match_param == 0){
-		    				var id = $("#par_tree_destination" ).find('span').length + 1;
+		    				var id = $("#par_tree_target" ).find('span').length + 1;
 							id = "out" + id;
-							$("#par_tree_destination").append("<span class='domBtn_destination'   domId='" + parId + "'>" +  id + ": " +  source.data.key  + "</span>");
+							$("#par_tree_target").append("<span class='domBtn_target'   domId='" + parId + "'>" +  id + ": " +  source.data.key  + "</span>");
 		               }	
 					
 				
 					
 				} else  {
-						alert("Input parameters accept only elements from destination tree");
+						alert("Input parameters accept only elements from target tree");
 					}
 					
 				
@@ -267,7 +267,7 @@
 	
 	$("#clearfunction").click(function(){
 		$("#par_tree_source").empty();
-		$("#par_tree_destination").empty();
+		$("#par_tree_target").empty();
 		$("#function_area").val("//Please specify function.\n//Example : \nout1 = in1 + in2;\nout2 = new Date();");
 	});
 
@@ -278,7 +278,7 @@
 		if($("#functionname").val() == ""){
 			alert("Please specify unique funcation name");	
 		}
-		else if($("#par_tree_destination" ).find('span').length == 0){
+		else if($("#par_tree_target" ).find('span').length == 0){
 			alert("Please specify at least one ouput parameter");	
 			}
 		else if($("#par_tree_source" ).find('span').length == 0){
@@ -287,7 +287,7 @@
 		else{
 			jQuery("#mapping_list").jqGrid('addRowData',++numberOfRecords,{id: numberOfRecords, sparam: $("#functionname").val() +  " Input" , dparam: $("#functionname").val() +  " Output" } );
 			$("#par_tree_source").empty();
-			$("#par_tree_destination").empty();
+			$("#par_tree_target").empty();
 			$("#functionname").val("");
 			$("#function_area").val("//Please specify function.\n//Example : \nout1 = in1 + in2;\nout2 = new Date();");
 		}

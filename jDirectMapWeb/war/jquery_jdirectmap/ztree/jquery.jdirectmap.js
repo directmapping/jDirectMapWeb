@@ -135,7 +135,7 @@
 	function helper_read_xml(){
 
 			var jTreeSource = new jDirectMapTreeProcessor("TEXT",$("#source_xml_area").val(), $("#tree_source"),"source");
-			var jTreeDestination = new jDirectMapTreeProcessor("TEXT",$("#dest_xml_area").val(), $("#tree_destination"),"destination");
+			var jTreeTarget = new jDirectMapTreeProcessor("TEXT",$("#dest_xml_area").val(), $("#tree_target"),"target");
 			
 	}	
 	
@@ -151,7 +151,7 @@
 	
 	$table.jqGrid({        
 				datatype: "local",
-				colNames:['id','Source Parameter', 'Destination Parameter'],
+				colNames:['id','Source Parameter', 'Target Parameter'],
 				colModel:[
 					{name:'id',index:'id', width:100 , sortable: false},
 					{name:'sparam',index:'sparam', width:1000 , sortable: false},
@@ -173,7 +173,7 @@
 					  if(id){ 
 						  
 						  $("#tree_source").find('a').removeClass($.fn.zTree.consts.node.CURSELECTED);
-						  $("#tree_destination").find('a').removeClass($.fn.zTree.consts.node.CURSELECTED);
+						  $("#tree_target").find('a').removeClass($.fn.zTree.consts.node.CURSELECTED);
 													
 						var streeObj = $.fn.zTree.getZTreeObj("tree_source");
 						var snode = streeObj.getNodesByParam("xpath",  $table.getRowData(id).sparam);
@@ -187,7 +187,7 @@
 						streeObj.expandAll(true);
 					
 						
-						var dtreeObj = $.fn.zTree.getZTreeObj("tree_destination");
+						var dtreeObj = $.fn.zTree.getZTreeObj("tree_target");
 						var dnode = dtreeObj.getNodesByParam("xpath",  $table.getRowData(id).dparam);
 					
 						for( var i=0, l=dnode.length; i<l; i++) {
@@ -229,7 +229,7 @@
 	
 	$("#clearfunction").click(function(){
 		$("#par_tree_source").empty();
-		$("#par_tree_destination").empty();
+		$("#par_tree_target").empty();
 		$("#function_area").val("//Please specify function.\n//Example : \nout1 = in1 + in2;\nout2 = new Date();");
 	});
 
@@ -240,7 +240,7 @@
 		if($("#functionname").val() == ""){
 			alert("Please specify unique funcation name");	
 		}
-		else if($("#par_tree_destination" ).find('span').length == 0){
+		else if($("#par_tree_target" ).find('span').length == 0){
 			alert("Please specify at least one ouput parameter");	
 			}
 		else if($("#par_tree_source" ).find('span').length == 0){
@@ -249,7 +249,7 @@
 		else{
 			jQuery("#mapping_list").jqGrid('addRowData',++numberOfRecords,{id: numberOfRecords, sparam: $("#functionname").val() +  " Input" , dparam: $("#functionname").val() +  " Output" } );
 			$("#par_tree_source").empty();
-			$("#par_tree_destination").empty();
+			$("#par_tree_target").empty();
 			$("#functionname").val("");
 			$("#function_area").val("//Please specify function.\n//Example : \nout1 = in1 + in2;\nout2 = new Date();");
 		}
@@ -299,12 +299,12 @@
 	
 	$("#collapse").click(function(){
 		$.fn.zTree.getZTreeObj("tree_source").expandAll(false);
-		$.fn.zTree.getZTreeObj("tree_destination").expandAll(false);
+		$.fn.zTree.getZTreeObj("tree_target").expandAll(false);
 		 });
 	
 	$("#expand").click(function(){
 		$.fn.zTree.getZTreeObj("tree_source").expandAll(true);
-		$.fn.zTree.getZTreeObj("tree_destination").expandAll(true);
+		$.fn.zTree.getZTreeObj("tree_target").expandAll(true);
 		 });
 	
 			

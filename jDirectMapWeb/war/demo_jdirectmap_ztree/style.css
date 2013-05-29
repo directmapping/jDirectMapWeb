@@ -8,7 +8,7 @@
 	overflow-y: scroll;
 }
 
-#tree_destination {
+#tree_target {
 	width: 95%;
 	height: 400px;
 	overflow-y: scroll;
@@ -97,7 +97,7 @@ input:focus {
 	border: 1px silver solid;
 }
 
-.categoryDiv_destination {
+.categoryDiv_target {
 	float: right;
 	width: 95%;
 	height: 50px;
@@ -116,7 +116,7 @@ input:focus {
 	border-radius: 10px;
 }
 
-.domBtn_destination {
+.domBtn_target {
 	display: block;
 	float: right;
 	cursor: pointer;

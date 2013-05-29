@@ -1,5 +1,5 @@
 eclipse.preferences.version=1
-jarsExcludedFromWebInfLib=C\:/Users/Misko/Documents/GitHub/jDirectMapWeb/jDirectMapWeb/lib/gson-2.2.2.jar|C\:/Users/Misko/Documents/GitHub/jDirectMapWeb/jDirectMapWeb/lib/milyn-smooks-all-1.5.1.jar
+jarsExcludedFromWebInfLib=C\:/Users/Misko/Documents/GitHub/jDirectMapWeb/jDirectMapWeb/lib/gson-2.2.2.jar|C\:/Users/Misko/Documents/GitHub/jDirectMapWeb/jDirectMapWeb/lib/milyn-smooks-all-1.5.1.jar|C\:/Users/Misko/Documents/GitHub/jDirectMapWeb/jDirectMapWeb/lib/xercesImpl-2.10.0.jar|C\:/Users/Misko/Documents/GitHub/jDirectMapWeb/jDirectMapWeb/lib/xml-apis-ext.jar|C\:/Users/Misko/Documents/GitHub/jDirectMapWeb/jDirectMapWeb/lib/xml-apis.jar
 launchConfigExternalUrlPrefix=
 warSrcDir=war
 warSrcDirIsOutput=true

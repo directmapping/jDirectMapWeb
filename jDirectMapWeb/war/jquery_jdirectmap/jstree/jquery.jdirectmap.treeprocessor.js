@@ -92,8 +92,8 @@ function jDirectMapTreeProcessor(input_type, input, tree_element,type) {
 	if(type == "source"){
 		this.initTreeSource(_treedata);
 	}
-	else if(type == "destination"){
-		this.initTreeDestination(_treedata);
+	else if(type == "target"){
+		this.initTreeTarget(_treedata);
 	}
 	else{
 		this.initTree(_treedata);
@@ -149,7 +149,7 @@ jDirectMapTreeProcessor.prototype.initTreeSource = function(data){
 
 
 
-jDirectMapTreeProcessor.prototype.initTreeDestination = function(data){
+jDirectMapTreeProcessor.prototype.initTreeTarget = function(data){
 	this.tree_element.jstree({
 		"json_data" : {
 			"data":data,
@@ -161,11 +161,11 @@ jDirectMapTreeProcessor.prototype.initTreeDestination = function(data){
 		 "before": false,
 		 "inside": true,
 		 "drag_target" : false,
-		 "drop_target" : "#dom_tree_destination",
+		 "drop_target" : "#dom_tree_target",
 	     "drop_finish" : function (data) {
-	    		var  param_id = "tree_destination_" + data.o.attr("id");
+	    		var  param_id = "tree_target_" + data.o.attr("id");
 	    		var match_param = 0;
-        		$("#par_tree_destination").find("span").each(function() {
+        		$("#par_tree_target").find("span").each(function() {
 						if(    this.attributes["domId"].value  == param_id ) {
 						match_param++;
 						}					
@@ -173,9 +173,9 @@ jDirectMapTreeProcessor.prototype.initTreeDestination = function(data){
         			});
      
         		if (match_param == 0){
-	    				var id = $("#par_tree_destination" ).find('span').length + 1;
+	    				var id = $("#par_tree_target" ).find('span').length + 1;
 						id = "out" + id;
-						$("#par_tree_destination").append("<span class='domBtn_destination'   domId='" + param_id + "'>" +  id + ": " +  data.o.attr("id")  + "</span>");
+						$("#par_tree_target").append("<span class='domBtn_target'   domId='" + param_id + "'>" +  id + ": " +  data.o.attr("id")  + "</span>");
 	               }		
 	           
 	     	}
